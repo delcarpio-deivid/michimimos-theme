@@ -1,0 +1,47 @@
+{%- comment -%}
+  Tarjeta de artículo para listados de blog.
+  Params: article (required), show_image (bool), show_date (bool), heading_tag (h2|h3)
+{%- endcomment -%}
+
+{%- liquid
+  assign heading_tag = heading_tag | default: 'h2'
+  if heading_tag != 'h2' and heading_tag != 'h3'
+    assign heading_tag = 'h2'
+  endif
+  assign article_alt = article.image.alt | default: article.title
+-%}
+
+<article class="article-card">
+  <a class="article-card__link" href="{{ article.url }}">
+    {%- if show_image and article.image != blank -%}
+      <div class="article-card__media">
+        {{
+          article.image
+          | image_url: width: 900
+          | image_tag:
+            class: 'article-card__image',
+            widths: '400, 600, 900',
+            sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 100vw',
+            loading: 'lazy',
+            alt: article_alt
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="article-card__body">
+      {%- if show_date -%}
+        <time class="article-card__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{ article.published_at | date: format: 'month_day_year' }}
+        </time>
+      {%- endif -%}
+
+      <{{ heading_tag }} class="article-card__title">{{ article.title | escape }}</{{ heading_tag }}>
+
+      {%- if article.excerpt != blank -%}
+        <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
+      {%- endif -%}
+
+      <span class="article-card__more">{{ 'blog.read_more' | t }}</span>
+    </div>
+  </a>
+</article>

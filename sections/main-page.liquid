@@ -1,7 +1,22 @@
-<section class="section-stub" aria-labelledby="PageHeading-{{ section.id }}">
-  <div class="page-width">
-    <h1 id="PageHeading-{{ section.id }}">{{ page.title | escape }}</h1>
-    <div class="rte">{{ page.content }}</div>
+{%- comment -%}
+  Página CMS: un H1 + contenido RTE con ancho de lectura.
+{%- endcomment -%}
+
+<section class="content-page" aria-labelledby="PageHeading-{{ section.id }}">
+  <div class="page-width content-page__inner">
+    <header class="content-page__header">
+      <h1 id="PageHeading-{{ section.id }}" class="content-page__title">
+        {{ page.title | escape }}
+      </h1>
+    </header>
+
+    {%- if page.content != blank -%}
+      <div class="content-page__body rte">
+        {{ page.content }}
+      </div>
+    {%- else -%}
+      <p class="content-page__empty">{{ 'page.empty' | t }}</p>
+    {%- endif -%}
   </div>
 </section>
 

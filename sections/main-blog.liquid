@@ -1,22 +1,43 @@
-<section class="section-stub" aria-labelledby="BlogHeading-{{ section.id }}">
-  <div class="page-width">
-    <h1 id="BlogHeading-{{ section.id }}">{{ blog.title | escape }}</h1>
+{%- comment -%}
+  Índice de blog: H1, grid de artículos, paginación.
+{%- endcomment -%}
 
-    {%- paginate blog.articles by 6 -%}
+{%- liquid
+  assign articles_per_page = section.settings.articles_per_page | default: 6
+  assign show_image = section.settings.show_image
+  assign show_date = section.settings.show_date
+-%}
+
+<section class="blog-page" aria-labelledby="BlogHeading-{{ section.id }}">
+  <div class="page-width blog-page__inner">
+    <header class="blog-page__header">
+      <h1 id="BlogHeading-{{ section.id }}" class="blog-page__title">
+        {{ blog.title | escape }}
+      </h1>
+    </header>
+
+    {%- paginate blog.articles by articles_per_page -%}
       {%- if blog.articles.size == 0 -%}
-        <p>{{ 'blog.empty' | t }}</p>
+        <p class="blog-page__empty">{{ 'blog.empty' | t }}</p>
       {%- else -%}
-        <ul role="list">
+        <ul class="blog-page__list" role="list">
           {%- for article in blog.articles -%}
-            <li>
-              <a href="{{ article.url }}">{{ article.title | escape }}</a>
-              {%- if article.excerpt != blank -%}
-                <p>{{ article.excerpt | strip_html | truncate: 140 }}</p>
-              {%- endif -%}
+            <li class="blog-page__item">
+              {% render 'article-card',
+                article: article,
+                show_image: show_image,
+                show_date: show_date,
+                heading_tag: 'h2'
+              %}
             </li>
           {%- endfor -%}
         </ul>
-        {{ paginate | default_pagination }}
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="blog-page__pagination" aria-label="{{ 'blog.pagination' | t }}">
+            {{ paginate | default_pagination }}
+          </nav>
+        {%- endif -%}
       {%- endif -%}
     {%- endpaginate -%}
   </div>
@@ -27,6 +48,28 @@
   "name": "t:sections.main_blog.name",
   "tag": "section",
   "class": "section-main-blog",
-  "settings": []
+  "settings": [
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "label": "t:sections.main_blog.settings.articles_per_page.label",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "t:sections.main_blog.settings.show_image.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.main_blog.settings.show_date.label",
+      "default": true
+    }
+  ]
 }
 {% endschema %}

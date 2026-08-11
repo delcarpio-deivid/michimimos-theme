@@ -123,17 +123,32 @@
     "quantity": "Cantidad",
     "view_cart": "Ver carrito"
   },
+  "date_formats": {
+    "month_day_year": "%d de %B %Y"
+  },
   "blog": {
     "title": "Blog",
     "empty": "Pronto compartiremos tips cercanos y con criterio.",
-    "read_more": "Leer más"
+    "read_more": "Leer más",
+    "pagination": "Paginación del blog"
   },
   "article": {
     "title": "Artículo",
-    "back": "Volver al blog"
+    "back": "Volver al blog",
+    "by_author": "Por {{ author }}",
+    "cta": {
+      "heading": "¿Listo para elegir con criterio?",
+      "label": "Ver rascadores para tu gato"
+    }
   },
   "page": {
-    "title": "Página"
+    "title": "Página",
+    "empty": "Esta página aún no tiene contenido. Puedes editarla en el admin."
+  },
+  "about": {
+    "tagline": "Si buscas confort y seguridad para tu gato de interior, aquí estamos para ayudarte a elegir sin ruido.",
+    "cta_label": "Ver colecciones",
+    "extra_heading": "Siguiente paso"
   },
   "gift_cards": {
     "issued": "Tu gift card de {{ value }}"

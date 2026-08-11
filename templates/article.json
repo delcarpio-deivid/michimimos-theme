@@ -2,7 +2,12 @@
   "sections": {
     "main": {
       "type": "main-article",
-      "settings": {}
+      "settings": {
+        "show_date": true,
+        "show_author": false,
+        "cta_heading": "¿Listo para elegir con criterio?",
+        "cta_label": "Ver rascadores para tu gato"
+      }
     }
   },
   "order": ["main"]

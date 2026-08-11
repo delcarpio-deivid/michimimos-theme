@@ -1,17 +1,96 @@
-<article class="section-stub" aria-labelledby="ArticleHeading-{{ section.id }}">
-  <div class="page-width">
-    <p>
+{%- comment -%}
+  Artículo de blog (RF-5): H1, body RTE, CTA interno a producto o colección.
+{%- endcomment -%}
+
+{%- liquid
+  assign show_date = section.settings.show_date
+  assign show_author = section.settings.show_author
+  assign article_alt = article.image.alt | default: article.title
+
+  assign cta_heading = section.settings.cta_heading
+  if cta_heading == blank
+    assign cta_heading = 'article.cta.heading' | t
+  endif
+
+  assign cta_label = section.settings.cta_label
+  if cta_label == blank
+    assign cta_label = 'article.cta.label' | t
+  endif
+
+  assign cta_url = blank
+  assign cta_dest_title = blank
+  if section.settings.product != blank
+    assign cta_url = section.settings.product.url
+    assign cta_dest_title = section.settings.product.title
+  elsif section.settings.collection != blank
+    assign cta_url = section.settings.collection.url
+    assign cta_dest_title = section.settings.collection.title
+  endif
+-%}
+
+<article class="article-page" aria-labelledby="ArticleHeading-{{ section.id }}">
+  <div class="page-width article-page__inner">
+    <p class="article-page__back">
       <a href="{{ blog.url }}">{{ 'article.back' | t }}</a>
     </p>
-    <h1 id="ArticleHeading-{{ section.id }}">{{ article.title | escape }}</h1>
+
+    <header class="article-page__header">
+      <h1 id="ArticleHeading-{{ section.id }}" class="article-page__title">
+        {{ article.title | escape }}
+      </h1>
+
+      {%- if show_date or show_author -%}
+        <p class="article-page__meta">
+          {%- if show_date -%}
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: format: 'month_day_year' }}
+            </time>
+          {%- endif -%}
+          {%- if show_author and article.author != blank -%}
+            {%- if show_date -%}
+              <span aria-hidden="true"> · </span>
+            {%- endif -%}
+            <span>{{ 'article.by_author' | t: author: article.author }}</span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </header>
+
     {%- if article.image -%}
-      {{
-        article.image
-        | image_url: width: 1200
-        | image_tag: loading: 'eager', widths: '600, 1200', sizes: '100vw', alt: article.image.alt
-      }}
+      <div class="article-page__media">
+        {{
+          article.image
+          | image_url: width: 1400
+          | image_tag:
+            class: 'article-page__image',
+            widths: '600, 900, 1200, 1400',
+            sizes: '(min-width: 990px) 68rem, 100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: article_alt
+        }}
+      </div>
     {%- endif -%}
-    <div class="rte">{{ article.content }}</div>
+
+    <div class="article-page__content rte">
+      {{ article.content }}
+    </div>
+
+    {%- if cta_url != blank -%}
+      <aside class="article-cta" aria-labelledby="ArticleCta-{{ section.id }}">
+        <div class="article-cta__inner">
+          <h2 id="ArticleCta-{{ section.id }}" class="article-cta__heading">
+            {{ cta_heading | escape }}
+          </h2>
+          {%- if cta_dest_title != blank -%}
+            <p class="article-cta__hint">{{ cta_dest_title | escape }}</p>
+          {%- endif -%}
+          <a class="button article-cta__button" href="{{ cta_url }}">
+            {{ cta_label | escape }}
+          </a>
+        </div>
+      </aside>
+    {%- endif -%}
   </div>
 </article>
 
@@ -20,6 +99,47 @@
   "name": "t:sections.main_article.name",
   "tag": "section",
   "class": "section-main-article",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.main_article.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.main_article.settings.show_author.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_article.settings.cta_header"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "t:sections.main_article.settings.cta_heading.label",
+      "default": "¿Listo para elegir con criterio?"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.main_article.settings.cta_label.label",
+      "default": "Ver rascadores para tu gato"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.main_article.settings.product.label",
+      "info": "t:sections.main_article.settings.product.info"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.main_article.settings.collection.label",
+      "info": "t:sections.main_article.settings.collection.info"
+    }
+  ]
 }
 {% endschema %}
