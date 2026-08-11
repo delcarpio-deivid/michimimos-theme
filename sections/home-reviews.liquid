@@ -1,0 +1,101 @@
+{%- comment -%}
+  Reviews placeholder (texto editable) hasta app real en F8.
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'home.reviews.heading' | t
+  endif
+
+  assign has_quotes = false
+  for block in section.blocks
+    if block.settings.quote != blank
+      assign has_quotes = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_quotes -%}
+  <section class="home-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}">
+    <div class="page-width home-reviews__inner">
+      <h2 id="ReviewsHeading-{{ section.id }}" class="home-reviews__heading">
+        {{ heading | escape }}
+      </h2>
+
+      <ul class="home-reviews__list" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.quote != blank -%}
+            <li class="home-reviews__item" {{ block.shopify_attributes }}>
+              <blockquote class="home-reviews__quote">
+                <p>{{ block.settings.quote | escape }}</p>
+                {%- if block.settings.author != blank -%}
+                  <footer class="home-reviews__author">{{ block.settings.author | escape }}</footer>
+                {%- endif -%}
+              </blockquote>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.home_reviews.name",
+  "tag": "section",
+  "class": "section-home-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.home_reviews.settings.heading.label",
+      "default": "Lo que cuentan en casa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "t:sections.home_reviews.blocks.quote.name",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "t:sections.home_reviews.blocks.quote.settings.quote.label",
+          "default": "El rascador quedó firme y mi gato lo adoptó en el primer día. Se nota que pensaron en el uso real."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "t:sections.home_reviews.blocks.quote.settings.author.label",
+          "default": "Camila, Santiago"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "t:sections.home_reviews.name",
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "El rascador quedó firme y mi gato lo adoptó en el primer día. Se nota que pensaron en el uso real.",
+            "author": "Camila, Santiago"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "Pedí desde Lima y llegó bien embalado. El tono de la tienda se siente cercano, sin exagerar.",
+            "author": "Diego, Lima"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+{%- comment -%}
+  Sobre Michimimos: título + párrafo cercano + enlace a página.
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'home.about.heading' | t
+  endif
+
+  assign text = section.settings.text
+  if text == blank
+    assign text = 'home.about.text' | t
+  endif
+
+  assign link_label = section.settings.link_label
+  if link_label == blank
+    assign link_label = 'home.about.link' | t
+  endif
+
+  assign link_url = blank
+  if section.settings.page != blank
+    assign link_url = section.settings.page.url
+  elsif section.settings.link != blank
+    assign link_url = section.settings.link
+  endif
+-%}
+
+<section class="home-about" aria-labelledby="AboutHeading-{{ section.id }}">
+  <div class="page-width home-about__inner">
+    <h2 id="AboutHeading-{{ section.id }}" class="home-about__heading">
+      {{ heading | escape }}
+    </h2>
+    <p class="home-about__text">{{ text | escape }}</p>
+    {%- if link_url != blank -%}
+      <a class="home-about__link" href="{{ link_url }}">{{ link_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.home_about.name",
+  "tag": "section",
+  "class": "section-home-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.home_about.settings.heading.label",
+      "default": "Michimimos, con criterio"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.home_about.settings.text.label",
+      "default": "Somos una tienda cercana para quienes viven con gatos de interior. Priorizamos confort, seguridad y piezas que encajan en el ritmo real del hogar."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.home_about.settings.link_label.label",
+      "default": "Conócenos"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "t:sections.home_about.settings.page.label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.home_about.settings.link.label",
+      "info": "t:sections.home_about.settings.link.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.home_about.name"
+    }
+  ]
+}
+{% endschema %}

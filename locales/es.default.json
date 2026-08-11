@@ -50,7 +50,30 @@
   "home": {
     "heading": "Michimimos",
     "subheading": "Productos pensados para gatos de interior: cómodos, seguros y con buen criterio.",
-    "cta": "Explorar catálogo"
+    "cta": "Explorar catálogo",
+    "hero": {
+      "heading": "Bienestar calmado para gatos de interior",
+      "text": "Elegimos con criterio lo que tu gato usa cada día: rascadores firmes, descanso seguro y rutinas que se sienten bien en casa.",
+      "cta": "Ver rascadores"
+    },
+    "trust": {
+      "heading": "Compra con calma"
+    },
+    "collections": {
+      "heading": "Empieza por aquí"
+    },
+    "about": {
+      "heading": "Michimimos, con criterio",
+      "text": "Somos una tienda cercana para quienes viven con gatos de interior. Priorizamos confort, seguridad y piezas que encajan en el ritmo real del hogar.",
+      "link": "Conócenos"
+    },
+    "reviews": {
+      "heading": "Lo que cuentan en casa"
+    },
+    "blog": {
+      "heading": "Tips con criterio",
+      "view_all": "Ver el blog"
+    }
   },
   "products": {
     "title": "Producto",

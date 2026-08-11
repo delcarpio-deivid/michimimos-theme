@@ -1,0 +1,178 @@
+{%- comment -%}
+  Home hero: una composición above-the-fold (marca + H1 + frase + CTA + visual full-bleed).
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'home.hero.heading' | t
+  endif
+
+  assign text = section.settings.text
+  if text == blank
+    assign text = 'home.hero.text' | t
+  endif
+
+  assign cta_label = section.settings.cta_label
+  if cta_label == blank
+    assign cta_label = 'home.hero.cta' | t
+  endif
+
+  assign cta_url = routes.collections_url
+  if section.settings.collection != blank
+    assign cta_url = section.settings.collection.url
+  endif
+
+  assign secondary_label = section.settings.secondary_label
+  assign secondary_url = blank
+  if section.settings.secondary_page != blank
+    assign secondary_url = section.settings.secondary_page.url
+  elsif section.settings.secondary_link != blank
+    assign secondary_url = section.settings.secondary_link
+  endif
+
+  assign has_image = false
+  if section.settings.image != blank
+    assign has_image = true
+  endif
+
+  assign overlay_pct = section.settings.overlay_opacity | default: 40
+  assign overlay = overlay_pct | times: 0.01
+  assign align = section.settings.text_alignment | default: 'left'
+-%}
+
+<section
+  class="hero-brand{% if has_image %} hero-brand--media{% endif %} hero-brand--align-{{ align }}"
+  aria-labelledby="HeroHeading-{{ section.id }}"
+>
+  {%- if has_image -%}
+    <div class="hero-brand__media" aria-hidden="true">
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'hero-brand__image',
+          widths: '750, 1100, 1500, 1780, 2000, 2400',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+      <div
+        class="hero-brand__overlay"
+        style="--hero-overlay: {{ overlay }};"
+      ></div>
+    </div>
+  {%- endif -%}
+
+  <div class="page-width hero-brand__inner">
+    <div class="hero-brand__brand">
+      {% render 'logo', class: 'logo hero-brand__logo' %}
+    </div>
+
+    <h1 id="HeroHeading-{{ section.id }}" class="hero-brand__heading">
+      {{ heading | escape }}
+    </h1>
+
+    <p class="hero-brand__text">{{ text | escape }}</p>
+
+    <div class="hero-brand__actions">
+      <a class="button hero-brand__cta" href="{{ cta_url }}">
+        {{ cta_label | escape }}
+      </a>
+      {%- if secondary_label != blank and secondary_url != blank -%}
+        <a class="button button--secondary hero-brand__cta-secondary" href="{{ secondary_url }}">
+          {{ secondary_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.hero_brand.name",
+  "tag": "section",
+  "class": "section-hero-brand",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.hero_brand.settings.image.label",
+      "info": "t:sections.hero_brand.settings.image.info"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 20,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "t:sections.hero_brand.settings.overlay_opacity.label",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.hero_brand.settings.heading.label",
+      "default": "Bienestar calmado para gatos de interior"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.hero_brand.settings.text.label",
+      "default": "Elegimos con criterio lo que tu gato usa cada día: rascadores firmes, descanso seguro y rutinas que se sienten bien en casa."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.hero_brand.settings.collection.label",
+      "info": "t:sections.hero_brand.settings.collection.info"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.hero_brand.settings.cta_label.label",
+      "default": "Ver rascadores"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "t:sections.hero_brand.settings.secondary_label.label",
+      "default": "Sobre nosotros"
+    },
+    {
+      "type": "page",
+      "id": "secondary_page",
+      "label": "t:sections.hero_brand.settings.secondary_page.label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "t:sections.hero_brand.settings.secondary_link.label",
+      "info": "t:sections.hero_brand.settings.secondary_link.info"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "t:sections.hero_brand.settings.text_alignment.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.hero_brand.settings.text_alignment.options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.hero_brand.settings.text_alignment.options.center"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero_brand.name"
+    }
+  ]
+}
+{% endschema %}

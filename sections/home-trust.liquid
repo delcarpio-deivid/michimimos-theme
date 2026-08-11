@@ -1,0 +1,84 @@
+{%- comment -%}
+  Confianza: 2–3 líneas claras (envío, pago, cuidado). Sin icon row genérica.
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'home.trust.heading' | t
+  endif
+-%}
+
+<section class="home-trust" aria-labelledby="TrustHeading-{{ section.id }}">
+  <div class="page-width home-trust__inner">
+    <h2 id="TrustHeading-{{ section.id }}" class="home-trust__heading">
+      {{ heading | escape }}
+    </h2>
+
+    <ul class="home-trust__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.text != blank -%}
+          <li class="home-trust__item" {{ block.shopify_attributes }}>
+            {{ block.settings.text | escape }}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.home_trust.name",
+  "tag": "section",
+  "class": "section-home-trust",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.home_trust.settings.heading.label",
+      "default": "Compra con calma"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "line",
+      "name": "t:sections.home_trust.blocks.line.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.home_trust.blocks.line.settings.text.label",
+          "default": "Enviamos a Chile y Perú con seguimiento claro."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "t:sections.home_trust.name",
+      "blocks": [
+        {
+          "type": "line",
+          "settings": {
+            "text": "Enviamos a Chile y Perú con seguimiento claro."
+          }
+        },
+        {
+          "type": "line",
+          "settings": {
+            "text": "Pago seguro en el checkout de Shopify."
+          }
+        },
+        {
+          "type": "line",
+          "settings": {
+            "text": "Elegimos productos pensados para gatos de interior."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

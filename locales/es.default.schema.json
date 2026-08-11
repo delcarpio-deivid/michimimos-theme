@@ -90,6 +90,139 @@
         }
       }
     },
+    "hero_brand": {
+      "name": "Hero de marca",
+      "settings": {
+        "image": {
+          "label": "Imagen full-bleed",
+          "info": "Sube una foto de producto o atmósfera. Sin imagen = plano piedra."
+        },
+        "overlay_opacity": {
+          "label": "Opacidad del overlay"
+        },
+        "heading": {
+          "label": "Titular (H1)"
+        },
+        "text": {
+          "label": "Frase de apoyo"
+        },
+        "collection": {
+          "label": "Colección del CTA",
+          "info": "Ideal: Rascadores. Si está vacío, el CTA va a /collections."
+        },
+        "cta_label": {
+          "label": "Texto del CTA primario"
+        },
+        "secondary_label": {
+          "label": "Texto del CTA secundario"
+        },
+        "secondary_page": {
+          "label": "Página del CTA secundario"
+        },
+        "secondary_link": {
+          "label": "URL alternativa (secundario)",
+          "info": "Solo si no eliges página. Opcional."
+        },
+        "text_alignment": {
+          "label": "Alineación del texto",
+          "options": {
+            "left": "Izquierda",
+            "center": "Centro"
+          }
+        }
+      }
+    },
+    "home_trust": {
+      "name": "Confianza",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        }
+      },
+      "blocks": {
+        "line": {
+          "name": "Línea",
+          "settings": {
+            "text": {
+              "label": "Texto"
+            }
+          }
+        }
+      }
+    },
+    "home_featured_collections": {
+      "name": "Colecciones destacadas",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        },
+        "collection_1": {
+          "label": "Colección 1"
+        },
+        "collection_2": {
+          "label": "Colección 2"
+        },
+        "collection_3": {
+          "label": "Colección 3"
+        }
+      }
+    },
+    "home_about": {
+      "name": "Sobre Michimimos",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        },
+        "text": {
+          "label": "Párrafo"
+        },
+        "link_label": {
+          "label": "Texto del enlace"
+        },
+        "page": {
+          "label": "Página Sobre nosotros"
+        },
+        "link": {
+          "label": "URL alternativa",
+          "info": "Solo si no eliges página."
+        }
+      }
+    },
+    "home_reviews": {
+      "name": "Reseñas (texto)",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        }
+      },
+      "blocks": {
+        "quote": {
+          "name": "Cita",
+          "settings": {
+            "quote": {
+              "label": "Cita"
+            },
+            "author": {
+              "label": "Autor"
+            }
+          }
+        }
+      }
+    },
+    "home_blog": {
+      "name": "Blog (teaser)",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        },
+        "blog": {
+          "label": "Blog"
+        },
+        "post_limit": {
+          "label": "Cantidad de artículos"
+        }
+      }
+    },
     "main_product": {
       "name": "Producto (stub)"
     },
