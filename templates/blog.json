@@ -2,7 +2,11 @@
   "sections": {
     "main": {
       "type": "main-blog",
-      "settings": {}
+      "settings": {
+        "articles_per_page": 6,
+        "show_image": true,
+        "show_date": true
+      }
     }
   },
   "order": ["main"]

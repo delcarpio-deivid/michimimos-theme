@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "about_extra": {
+      "type": "page-about-extra",
+      "settings": {
+        "tagline": "Si buscas confort y seguridad para tu gato de interior, aquí estamos para ayudarte a elegir sin ruido.",
+        "cta_label": "Ver colecciones"
+      }
+    }
+  },
+  "order": ["main", "about_extra"]
+}

@@ -282,13 +282,65 @@
       "name": "Carrito"
     },
     "main_blog": {
-      "name": "Blog (stub)"
+      "name": "Blog",
+      "settings": {
+        "articles_per_page": {
+          "label": "Artículos por página"
+        },
+        "show_image": {
+          "label": "Mostrar imagen"
+        },
+        "show_date": {
+          "label": "Mostrar fecha"
+        }
+      }
     },
     "main_article": {
-      "name": "Artículo (stub)"
+      "name": "Artículo",
+      "settings": {
+        "show_date": {
+          "label": "Mostrar fecha"
+        },
+        "show_author": {
+          "label": "Mostrar autor"
+        },
+        "cta_header": "CTA interno (colección o producto)",
+        "cta_heading": {
+          "label": "Título del CTA"
+        },
+        "cta_label": {
+          "label": "Texto del botón"
+        },
+        "product": {
+          "label": "Producto",
+          "info": "Si eliges producto y colección, gana el producto."
+        },
+        "collection": {
+          "label": "Colección",
+          "info": "Se usa si no hay producto. Sin destino, el CTA no se muestra."
+        }
+      }
     },
     "main_page": {
-      "name": "Página (stub)"
+      "name": "Página"
+    },
+    "page_about_extra": {
+      "name": "Sobre nosotros — cierre",
+      "settings": {
+        "tagline": {
+          "label": "Tagline"
+        },
+        "cta_label": {
+          "label": "Texto del botón"
+        },
+        "collection": {
+          "label": "Colección destino"
+        },
+        "link": {
+          "label": "URL alternativa",
+          "info": "Solo si no eliges colección. Si ambos vacíos, va a /collections."
+        }
+      }
     },
     "main_search": {
       "name": "Búsqueda (stub)"
