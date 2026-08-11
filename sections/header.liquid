@@ -1,29 +1,101 @@
-{%- comment -%} Header stub — nav completo en F4 {%- endcomment -%}
+{%- comment -%}
+  Header: logo + linklist + mobile nav + cart trigger/drawer.
+  Menú: crear en Admin → Navegación (Inicio, colecciones, Blog, Sobre nosotros).
+{%- endcomment -%}
 
-<header class="site-header" role="banner">
+{%- liquid
+  assign menu = section.settings.menu
+-%}
+
+<header class="site-header" role="banner" data-site-header>
   <div class="page-width site-header__inner">
-    {% render 'logo' %}
+    <button
+      type="button"
+      class="site-header__menu-toggle"
+      data-nav-toggle
+      data-label-open="{{ 'header.menu_open' | t | escape }}"
+      data-label-close="{{ 'header.menu_close' | t | escape }}"
+      aria-expanded="false"
+      aria-controls="SiteNav-{{ section.id }}"
+      aria-label="{{ 'header.menu_open' | t }}"
+    >
+      <span class="site-header__menu-icon" aria-hidden="true"></span>
+    </button>
 
-    <nav aria-label="{{ 'header.home' | t }}">
-      <ul class="site-header__nav">
-        <li>
-          <a href="{{ routes.root_url }}">{{ 'header.home' | t }}</a>
-        </li>
-        <li>
-          <a href="{{ routes.collections_url }}">{{ 'list_collections.title' | t }}</a>
-        </li>
-        <li>
-          <a href="{{ routes.cart_url }}">{{ 'cart.title' | t }}</a>
-        </li>
+    {% render 'logo', class: 'logo site-header__logo' %}
+
+    <nav
+      id="SiteNav-{{ section.id }}"
+      class="site-header__nav-panel"
+      data-nav-panel
+      aria-label="{{ 'header.nav_label' | t }}"
+    >
+      <ul class="site-header__nav" role="list">
+        {%- if menu != blank -%}
+          {%- for link in menu.links -%}
+            <li>
+              <a
+                href="{{ link.url }}"
+                {% if link.active %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{- link.title | escape -}}
+              </a>
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          <li>
+            <a href="{{ routes.root_url }}" {% if request.page_type == 'index' %}aria-current="page"{% endif %}>
+              {{ 'header.home' | t }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ routes.collections_url }}">{{ 'list_collections.title' | t }}</a>
+          </li>
+        {%- endif -%}
       </ul>
     </nav>
+
+    <div class="site-header__actions">
+      <button
+        type="button"
+        class="site-header__cart-toggle"
+        data-cart-toggle
+        aria-expanded="false"
+        aria-controls="CartDrawer"
+        aria-label="{{ 'cart.title' | t }}"
+      >
+        <span class="site-header__cart-label">{{ 'cart.title' | t }}</span>
+        <span
+          class="site-header__cart-count"
+          data-cart-count
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {{- cart.item_count -}}
+        </span>
+      </button>
+    </div>
   </div>
+
+  <div class="site-header__backdrop" data-nav-backdrop hidden></div>
 </header>
+
+{% render 'cart-drawer' %}
 
 {% schema %}
 {
   "name": "t:sections.header.name",
-  "settings": [],
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.header.settings.menu.label",
+      "info": "t:sections.header.settings.menu.info",
+      "default": "main-menu"
+    }
+  ],
   "enabled_on": {
     "groups": ["header"]
   }

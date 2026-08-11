@@ -23,12 +23,21 @@ Logo público en `brand/` (fuente) y copias de trabajo en `assets/` para el tema
 
 La documentación de negocio, producto y arquitectura **no se publica** en este repositorio (es local al equipo). El único markdown versionado en remoto es este `README.md`.
 
-## Desarrollo local (cuando exista el scaffold)
+## Navegación (Admin)
+
+El header consume un **linklist** de Shopify (por defecto `main-menu`). En **Admin → Tienda online → Navegación**, crea o ajusta el menú con ítems tipo:
+
+Inicio · Rascadores · Camas · Fuentes de agua · Comederos automáticos · Juguetes · Paseo y viaje · Aseo · Blog · Sobre nosotros
+
+Las colecciones pueden ser placeholders hasta el catálogo (F8). El pie puede usar un menú `footer` (legal / Sobre nosotros / Blog).
+
+## Desarrollo local
 
 ```bash
 # Requiere Shopify CLI + acceso a la tienda
-shopify theme dev
 shopify theme check
+shopify theme push --theme 164432838877
+# Preview Dev (unpublished) — nunca --live desde agentes
 ```
 
 ## Contribución
