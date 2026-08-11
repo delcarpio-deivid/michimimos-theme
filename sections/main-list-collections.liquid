@@ -1,0 +1,28 @@
+<section class="section-stub" aria-labelledby="ListCollectionsHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="ListCollectionsHeading-{{ section.id }}">{{ 'list_collections.title' | t }}</h1>
+
+    {%- if collections.size == 0 -%}
+      <p>{{ 'list_collections.empty' | t }}</p>
+    {%- else -%}
+      <ul role="list">
+        {%- for collection in collections -%}
+          {%- unless collection.handle == 'frontpage' -%}
+            <li>
+              <a href="{{ collection.url }}">{{ collection.title | escape }}</a>
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_list_collections.name",
+  "tag": "section",
+  "class": "section-main-list-collections",
+  "settings": []
+}
+{% endschema %}

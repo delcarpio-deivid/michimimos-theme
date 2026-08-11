@@ -1,0 +1,102 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Saltar al contenido",
+      "logo": "Michimimos — ir al inicio"
+    },
+    "meta": {
+      "page": "Página {{ page }}",
+      "shop_name": "{{ name }}"
+    },
+    "continue_shopping": "Seguir mirando",
+    "search": {
+      "title": "Buscar",
+      "placeholder": "Busca camas, rascadores…",
+      "submit": "Buscar",
+      "no_results": "No encontramos resultados para “{{ terms }}”. Prueba con otras palabras."
+    },
+    "404": {
+      "title": "No encontramos esa página",
+      "subtext": "Tal vez el enlace cambió. Vuelve al inicio y te ayudamos a encontrar lo que necesita tu gato.",
+      "link": "Ir al inicio"
+    },
+    "password": {
+      "title": "Pronto abrimos",
+      "subtext": "Estamos preparando un hogar calmado para gatos de interior. Déjanos tu correo si quieres enterarte primero.",
+      "login_link": "¿Tienes la contraseña? Entra aquí",
+      "login_form_heading": "Entrar a la tienda",
+      "login_password_label": "Contraseña",
+      "login_submit": "Entrar",
+      "signup_form_heading": "Avísame cuando abramos",
+      "signup_email_label": "Correo",
+      "signup_submit": "Avisarme"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido"
+  },
+  "header": {
+    "home": "Inicio",
+    "stub_note": "Menú completo en F4"
+  },
+  "footer": {
+    "tagline": "Hogar calmado para gatos de interior.",
+    "shipping": "Enviamos a Chile y Perú.",
+    "stub_note": "Footer rico en F4"
+  },
+  "home": {
+    "heading": "Michimimos",
+    "subheading": "Productos pensados para gatos de interior: cómodos, seguros y con buen criterio.",
+    "cta": "Explorar catálogo"
+  },
+  "products": {
+    "title": "Producto",
+    "price": "Precio",
+    "add_to_cart": "Agregar al carrito",
+    "sold_out": "Agotado",
+    "unavailable": "No disponible",
+    "stub_note": "PDP completo en F6"
+  },
+  "collections": {
+    "title": "Colección",
+    "empty": "Aún no hay productos en esta colección.",
+    "product_count": {
+      "one": "{{ count }} producto",
+      "other": "{{ count }} productos"
+    },
+    "stub_note": "Filtros y grid en F6"
+  },
+  "list_collections": {
+    "title": "Colecciones",
+    "empty": "Pronto verás nuestras colecciones aquí."
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío. Cuando estés listo, elige algo que le guste a tu gato.",
+    "subtotal": "Subtotal",
+    "checkout": "Ir a pagar",
+    "update": "Actualizar",
+    "remove": "Quitar",
+    "stub_note": "Drawer de carrito en F4"
+  },
+  "blog": {
+    "title": "Blog",
+    "empty": "Pronto compartiremos tips cercanos y con criterio.",
+    "read_more": "Leer más"
+  },
+  "article": {
+    "title": "Artículo",
+    "back": "Volver al blog"
+  },
+  "page": {
+    "title": "Página"
+  },
+  "gift_cards": {
+    "issued": "Tu gift card de {{ value }}"
+  },
+  "customer": {
+    "account": {
+      "title": "Mi cuenta"
+    }
+  }
+}

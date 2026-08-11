@@ -1,0 +1,42 @@
+{%- comment -%} Collection stub — filtros/grid en F6 {%- endcomment -%}
+
+<section class="section-stub" aria-labelledby="CollectionHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="CollectionHeading-{{ section.id }}">{{ collection.title | escape }}</h1>
+
+    {%- if collection.description != blank -%}
+      <div class="rte">{{ collection.description }}</div>
+    {%- endif -%}
+
+    <p>
+      {{ 'collections.product_count' | t: count: collection.products_count }}
+    </p>
+
+    {%- paginate collection.products by 12 -%}
+      {%- if collection.products.size == 0 -%}
+        <p>{{ 'collections.empty' | t }}</p>
+      {%- else -%}
+        <ul role="list">
+          {%- for product in collection.products -%}
+            <li>
+              <a href="{{ product.url }}">{{ product.title | escape }}</a>
+              — {{ product.price | money }}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {{ paginate | default_pagination }}
+      {%- endif -%}
+    {%- endpaginate -%}
+
+    <p class="section-stub__note">{{ 'collections.stub_note' | t }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "tag": "section",
+  "class": "section-main-collection",
+  "settings": []
+}
+{% endschema %}

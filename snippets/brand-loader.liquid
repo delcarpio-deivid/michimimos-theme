@@ -1,0 +1,23 @@
+{%- comment -%}
+  Brand loader: mark centrado, dismiss vía theme.js (≤1.2s).
+  Respeta prefers-reduced-motion (CSS + JS).
+{%- endcomment -%}
+
+{%- if settings.show_brand_loader -%}
+  <div
+    class="brand-loader"
+    data-brand-loader
+    role="status"
+    aria-live="polite"
+    aria-label="{{ settings.brand_name | default: shop.name | escape }}"
+  >
+    <img
+      class="brand-loader__mark"
+      src="{{ 'logo-mark.svg' | asset_url }}"
+      alt=""
+      width="64"
+      height="64"
+      decoding="async"
+    >
+  </div>
+{%- endif -%}

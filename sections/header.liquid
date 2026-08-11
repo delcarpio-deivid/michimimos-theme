@@ -1,0 +1,31 @@
+{%- comment -%} Header stub — nav completo en F4 {%- endcomment -%}
+
+<header class="site-header" role="banner">
+  <div class="page-width site-header__inner">
+    {% render 'logo' %}
+
+    <nav aria-label="{{ 'header.home' | t }}">
+      <ul class="site-header__nav">
+        <li>
+          <a href="{{ routes.root_url }}">{{ 'header.home' | t }}</a>
+        </li>
+        <li>
+          <a href="{{ routes.collections_url }}">{{ 'list_collections.title' | t }}</a>
+        </li>
+        <li>
+          <a href="{{ routes.cart_url }}">{{ 'cart.title' | t }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

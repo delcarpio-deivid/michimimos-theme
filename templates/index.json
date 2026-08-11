@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-home",
+      "settings": {
+        "heading": "Michimimos",
+        "subheading": "Productos pensados para gatos de interior: cómodos, seguros y con buen criterio.",
+        "show_cta": true,
+        "cta_label": "Explorar catálogo"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,22 @@
+{%- comment -%} Footer stub — contenido rico en F4 {%- endcomment -%}
+
+<footer class="site-footer" role="contentinfo">
+  <div class="page-width site-footer__inner">
+    <div>
+      {% render 'logo', mark_only: true %}
+      <p>{{ 'footer.tagline' | t }}</p>
+      <p>{{ 'footer.shipping' | t }}</p>
+    </div>
+    <p class="section-stub__note">{{ 'footer.stub_note' | t }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "settings": [],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}
