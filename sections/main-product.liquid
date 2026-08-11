@@ -1,40 +1,276 @@
-{%- comment -%} Product stub — PDP completo en F6 {%- endcomment -%}
+{%- comment -%}
+  PDP: galería LCP, H1, precio, variantes, ATC, beneficios, ETA metafield, sticky móvil.
+{%- endcomment -%}
 
-<section class="section-stub" aria-labelledby="ProductHeading-{{ section.id }}">
-  <div class="page-width">
-    <h1 id="ProductHeading-{{ section.id }}">{{ product.title | escape }}</h1>
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_media = current_variant.featured_media | default: product.featured_media
+  assign product_form_id = 'ProductForm-' | append: section.id
+  assign option_count = product.options_with_values.size
+  assign use_radios = false
+  if option_count == 1 and product.options_with_values.first.values.size <= 5
+    assign use_radios = true
+  endif
 
-    {%- if product.featured_media -%}
-      {{
-        product.featured_media
-        | image_url: width: 800
-        | image_tag: loading: 'eager', widths: '400, 800', sizes: '(min-width: 750px) 400px, 100vw', alt: product.featured_media.alt
-      }}
-    {%- endif -%}
+  assign delivery_eta = product.metafields.custom.delivery_eta
+  if delivery_eta == blank
+    assign delivery_eta = product.metafields.custom.shipping_eta
+  endif
 
-    <p>
-      <span class="visually-hidden">{{ 'products.price' | t }}</span>
-      {{ product.selected_or_first_available_variant.price | money }}
-    </p>
+  assign eta_text = ''
+  if delivery_eta != blank
+    assign eta_text = delivery_eta.value | default: delivery_eta
+  endif
 
-    {%- form 'product', product -%}
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-      <button
-        type="submit"
-        name="add"
-        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
-      >
-        {%- if product.selected_or_first_available_variant.available -%}
-          {{ 'products.add_to_cart' | t }}
-        {%- else -%}
-          {{ 'products.sold_out' | t }}
+  assign benefits = section.settings.benefits
+-%}
+
+<section
+  class="product-page"
+  data-product-page
+  data-section-id="{{ section.id }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  aria-labelledby="ProductHeading-{{ section.id }}"
+>
+  <div class="page-width product-page__inner">
+    <div class="product-page__layout">
+      <div class="product-page__gallery" data-product-gallery>
+        <div class="product-page__featured" data-product-featured>
+          {%- if featured_media != blank -%}
+            {%- assign featured_alt = featured_media.alt | default: product.title -%}
+            {{
+              featured_media
+              | image_url: width: 1400
+              | image_tag:
+                class: 'product-page__featured-image',
+                widths: '400, 600, 800, 1000, 1400',
+                sizes: '(min-width: 990px) 48vw, 100vw',
+                loading: 'eager',
+                fetchpriority: 'high',
+                alt: featured_alt,
+                data-featured-image: ''
+            }}
+          {%- else -%}
+            <div class="product-page__featured-placeholder" aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <ul class="product-page__thumbs" role="list" data-product-thumbs>
+            {%- for media in product.media -%}
+              {%- assign thumb_alt = media.alt | default: product.title -%}
+              <li>
+                <button
+                  type="button"
+                  class="product-page__thumb{% if media.id == featured_media.id %} is-active{% endif %}"
+                  data-thumb
+                  data-media-id="{{ media.id }}"
+                  data-media-url="{{ media | image_url: width: 1400 }}"
+                  data-media-srcset="{{ media | image_url: width: 400 }} 400w, {{ media | image_url: width: 800 }} 800w, {{ media | image_url: width: 1400 }} 1400w"
+                  data-media-alt="{{ thumb_alt | escape }}"
+                  aria-label="{{ 'products.media_thumbnail' | t: index: forloop.index }}"
+                  aria-pressed="{% if media.id == featured_media.id %}true{% else %}false{% endif %}"
+                >
+                  {{
+                    media
+                    | image_url: width: 200
+                    | image_tag:
+                      class: 'product-page__thumb-image',
+                      widths: '100, 200',
+                      sizes: '72px',
+                      loading: 'lazy',
+                      alt: thumb_alt
+                  }}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
         {%- endif -%}
-      </button>
-    {%- endform -%}
+      </div>
 
-    <div class="rte">{{ product.description }}</div>
-    <p class="section-stub__note">{{ 'products.stub_note' | t }}</p>
+      <div class="product-page__info">
+        <h1 id="ProductHeading-{{ section.id }}" class="product-page__title">
+          {{ product.title | escape }}
+        </h1>
+
+        <p class="product-page__price" data-product-price>
+          <span class="visually-hidden">{{ 'products.price' | t }}</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="product-page__price-compare" data-compare-price>
+              {{ current_variant.compare_at_price | money }}
+            </span>
+          {%- else -%}
+            <span class="product-page__price-compare" data-compare-price hidden></span>
+          {%- endif -%}
+          <span class="product-page__price-current" data-current-price>
+            {{ current_variant.price | money }}
+          </span>
+        </p>
+
+        <p
+          class="product-page__availability"
+          data-product-availability
+          {% unless current_variant.available %}
+            data-unavailable
+          {% endunless %}
+        >
+          {%- if current_variant.available -%}
+            {{ 'products.available' | t }}
+          {%- else -%}
+            {{ 'products.sold_out' | t }}
+          {%- endif -%}
+        </p>
+
+        {%- if eta_text != blank -%}
+          <p class="product-page__eta">
+            {{ 'products.delivery_eta' | t: eta: eta_text }}
+          </p>
+        {%- endif -%}
+
+        {%- form 'product', product, id: product_form_id, class: 'product-page__form', data-product-form: '' -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ current_variant.id }}"
+            data-product-variant-id
+          >
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="product-page__variants" data-product-options>
+              {%- for option in product.options_with_values -%}
+                {%- assign option_index = forloop.index0 -%}
+                <fieldset class="product-page__option">
+                  <legend class="product-page__option-label">{{ option.name | escape }}</legend>
+
+                  {%- if use_radios and forloop.first -%}
+                    <div class="product-page__option-radios">
+                      {%- for value in option.values -%}
+                        <label class="product-page__radio">
+                          <input
+                            type="radio"
+                            name="option-{{ option_index }}"
+                            value="{{ value | escape }}"
+                            data-option-index="{{ option_index }}"
+                            {% if option.selected_value == value %}
+                              checked
+                            {% endif %}
+                          >
+                          <span>{{ value | escape }}</span>
+                        </label>
+                      {%- endfor -%}
+                    </div>
+                  {%- else -%}
+                    <label class="visually-hidden" for="Option-{{ section.id }}-{{ option_index }}">
+                      {{ option.name | escape }}
+                    </label>
+                    <select
+                      id="Option-{{ section.id }}-{{ option_index }}"
+                      class="product-page__option-select"
+                      name="options[{{ option.name | escape }}]"
+                      data-option-index="{{ option_index }}"
+                    >
+                      {%- for value in option.values -%}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected
+                          {% endif %}
+                        >
+                          {{- value | escape -}}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  {%- endif -%}
+                </fieldset>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <div class="product-page__quantity">
+            <label for="Quantity-{{ section.id }}">{{ 'products.quantity' | t }}</label>
+            <input
+              id="Quantity-{{ section.id }}"
+              class="product-page__quantity-input"
+              type="number"
+              name="quantity"
+              min="1"
+              value="1"
+              data-product-quantity
+            >
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="button product-page__atc"
+            data-add-to-cart
+            {% unless current_variant.available %}
+              disabled
+            {% endunless %}
+          >
+            <span data-add-to-cart-text>
+              {%- if current_variant.available -%}
+                {{ 'products.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.sold_out' | t }}
+              {%- endif -%}
+            </span>
+          </button>
+          <p
+            class="product-page__atc-status"
+            data-atc-status
+            data-label-adding="{{ 'products.adding' | t | escape }}"
+            data-label-added="{{ 'products.added' | t | escape }}"
+            data-label-error="{{ 'products.add_error' | t | escape }}"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></p>
+        {%- endform -%}
+
+        {%- if benefits != blank -%}
+          <div class="product-page__benefits rte">{{ benefits }}</div>
+        {%- elsif product.description != blank -%}
+          <div class="product-page__description rte">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- if benefits != blank and product.description != blank -%}
+          <div class="product-page__description rte">{{ product.description }}</div>
+        {%- endif -%}
+      </div>
+    </div>
   </div>
+
+  <div
+    class="product-sticky-atc"
+    data-sticky-atc
+    hidden
+  >
+    <div class="product-sticky-atc__inner page-width">
+      <p class="product-sticky-atc__title">{{ product.title | escape }}</p>
+      <p class="product-sticky-atc__price" data-sticky-price>{{ current_variant.price | money }}</p>
+      <button
+        type="button"
+        class="button product-sticky-atc__button"
+        data-sticky-atc-button
+        {% unless current_variant.available %}
+          disabled
+        {% endunless %}
+      >
+        <span data-sticky-atc-text>
+          {%- if current_variant.available -%}
+            {{ 'products.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.sold_out' | t }}
+          {%- endif -%}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
 </section>
 
 {% schema %}
@@ -42,6 +278,13 @@
   "name": "t:sections.main_product.name",
   "tag": "section",
   "class": "section-main-product",
-  "settings": []
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "benefits",
+      "label": "t:sections.main_product.settings.benefits.label",
+      "info": "t:sections.main_product.settings.benefits.info"
+    }
+  ]
 }
 {% endschema %}

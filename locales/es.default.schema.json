@@ -224,10 +224,56 @@
       }
     },
     "main_product": {
-      "name": "Producto (stub)"
+      "name": "Producto",
+      "settings": {
+        "benefits": {
+          "label": "Beneficios (opcional)",
+          "info": "Si está vacío, se muestra la descripción del producto."
+        }
+      }
+    },
+    "product_faq": {
+      "name": "FAQ del producto",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        }
+      },
+      "blocks": {
+        "faq_item": {
+          "name": "Pregunta",
+          "settings": {
+            "question": {
+              "label": "Pregunta"
+            },
+            "answer": {
+              "label": "Respuesta"
+            }
+          }
+        }
+      }
     },
     "main_collection": {
-      "name": "Colección (stub)"
+      "name": "Colección",
+      "settings": {
+        "products_per_page": {
+          "label": "Productos por página"
+        },
+        "show_description": {
+          "label": "Mostrar descripción SEO"
+        },
+        "description_position": {
+          "label": "Posición de la descripción",
+          "options": {
+            "top": "Arriba",
+            "bottom": "Abajo"
+          }
+        },
+        "enable_filters": {
+          "label": "Mostrar filtros de tienda",
+          "info": "Solo aparecen si configuraste filtros de colección en Admin. Si no hay, queda el orden."
+        }
+      }
     },
     "main_list_collections": {
       "name": "Colecciones (stub)"

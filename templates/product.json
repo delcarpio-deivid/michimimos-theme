@@ -3,7 +3,37 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "product_faq": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_shipping": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cuánto tarda el envío a Chile o Perú?",
+            "answer": "<p>Te contamos el plazo estimado en la ficha cuando esté disponible. Si no lo ves, escríbenos y te orientamos con calma según tu ciudad.</p>"
+          }
+        },
+        "faq_size": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Cómo elijo el tamaño adecuado para mi gato?",
+            "answer": "<p>Revisa medidas y peso recomendado en la descripción. Si tu gato es grande o muy activo, prioriza estructuras firmes y espacio para estirarse.</p>"
+          }
+        },
+        "faq_returns": {
+          "type": "faq_item",
+          "settings": {
+            "question": "¿Puedo devolver el producto si no encaja en casa?",
+            "answer": "<p>Sí: revisa la política de devoluciones en el pie de página. Queremos que te sientas tranquilo al elegir.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_shipping", "faq_size", "faq_returns"],
+      "settings": {
+        "heading": "Preguntas frecuentes"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "product_faq"]
 }

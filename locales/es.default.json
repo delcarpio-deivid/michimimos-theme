@@ -79,18 +79,34 @@
     "title": "Producto",
     "price": "Precio",
     "add_to_cart": "Agregar al carrito",
+    "adding": "Agregando…",
+    "added": "Listo, lo sumamos al carrito",
+    "add_error": "No pudimos agregarlo. Intenta de nuevo.",
     "sold_out": "Agotado",
+    "available": "Disponible",
     "unavailable": "No disponible",
-    "stub_note": "PDP completo en F6"
+    "quantity": "Cantidad",
+    "media_thumbnail": "Ver imagen {{ index }}",
+    "delivery_eta": "Entrega estimada: {{ eta }}",
+    "faq": {
+      "heading": "Preguntas frecuentes"
+    }
   },
   "collections": {
     "title": "Colección",
-    "empty": "Aún no hay productos en esta colección.",
+    "empty": "Aún no hay productos en esta colección. Pronto sumaremos opciones con criterio.",
     "product_count": {
       "one": "{{ count }} producto",
       "other": "{{ count }} productos"
     },
-    "stub_note": "Filtros y grid en F6"
+    "sort_by": "Ordenar",
+    "apply_sort": "Aplicar orden",
+    "filters": "Filtros",
+    "clear_filters": "Quitar filtros",
+    "apply_filters": "Aplicar filtros",
+    "price_min": "Precio mínimo",
+    "price_max": "Precio máximo",
+    "pagination": "Paginación de la colección"
   },
   "list_collections": {
     "title": "Colecciones",

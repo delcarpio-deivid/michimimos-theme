@@ -2,7 +2,12 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {
+        "products_per_page": 12,
+        "show_description": true,
+        "description_position": "top",
+        "enable_filters": true
+      }
     }
   },
   "order": ["main"]
