@@ -15,6 +15,10 @@ Desarrollo del tema en la rama `dev` y en feature branches. `main` se mantiene l
 | `dev` | Integración y preview de desarrollo |
 | `feat/*` | Trabajo acotado (una fase o feature) |
 
+## Marca (assets)
+
+Logo público en `brand/` (fuente) y copias de trabajo en `assets/` para el tema: mark SVG, wordmark, lockup, mono, PNG @1x/@2x/@3x, `favicon.ico`, `apple-touch-icon.png`.
+
 ## Documentación
 
 La documentación de negocio, producto y arquitectura **no se publica** en este repositorio (es local al equipo). El único markdown versionado en remoto es este `README.md`.

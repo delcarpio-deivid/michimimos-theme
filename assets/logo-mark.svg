@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Michimimos">
+  <!-- Abstract M monogram: moss badge, legible at 16x16. No cat clipart. -->
+  <rect width="32" height="32" rx="8" fill="#3F6F5B"/>
+  <path
+    fill="#F3F1EE"
+    d="M7.5 22.5V10.2c0-.55.45-1 1-1h1.15c.4 0 .76.24.92.61L13.8 17.1l3.23-7.29c.16-.37.52-.61.92-.61H19c.55 0 1 .45 1 1v12.3c0 .55-.45 1-1 1h-1.35c-.55 0-1-.45-1-1v-7.05l-2.55 5.75c-.2.45-.64.74-1.13.74h-.94c-.49 0-.93-.29-1.13-.74L9.35 15.45v7.05c0 .55-.45 1-1 1H8.5c-.55 0-1-.45-1-1z"
+  />
+</svg>
