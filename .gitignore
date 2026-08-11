@@ -11,6 +11,11 @@ node_modules/
 .env.*
 !.env.example
 
+# Documentación del proyecto (sensible) — solo local; no publicar en remoto público
+# Excepción: README.md es la única markdown pública
+/*.md
+!/README.md
+
 # OS / editor
 .DS_Store
 Thumbs.db
@@ -19,7 +24,7 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 
-# Skills / agentes (caches locales; el proyecto puede versionar skills instaladas en .agents o .cursor/skills si se acuerda)
+# Caches locales de agentes
 *.local.md
 
 # Build / temporales

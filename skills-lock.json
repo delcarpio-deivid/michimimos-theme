@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "skills": {
+    "accessibility": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/accessibility/SKILL.md",
+      "computedHash": "ebfa09617a2ac4fd64afd73267726b787145a8d14294df3f8802b462c91594ab"
+    },
+    "accessible-motion": {
+      "source": "dylantarre/animation-principles",
+      "sourceType": "github",
+      "skillPath": "skills/01-by-domain/accessible-motion/SKILL.md",
+      "computedHash": "51fd3733024ec6808ebce6268e2f1e7cef7510e434a88e9d6294d332a64e99c4"
+    },
+    "animate": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animate/SKILL.md",
+      "computedHash": "95a455620074de0cd5e57f74bf276645198d04b67ddcd33c783aa51d24063346"
+    },
+    "animation-vocabulary": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animation-vocabulary/SKILL.md",
+      "computedHash": "280c6688ef2568ad92f40c4dc638f0cc5cde0f49bdd6debd097410aa9945f44f"
+    },
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "899b84384f74f540ea5284d9b2e9234e050998b42eacc805410b518d4226c0b3"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "87067d79205fdedc6d682891027dd9c7335486c4b4dc2e785638941a9d2e6061"
+    },
+    "find-animation-opportunities": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-animation-opportunities/SKILL.md",
+      "computedHash": "c6b1d0f6d03a11f8772b1cef4ca5cc88301ae8641ac2697c85ffa87eb458e40a"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "93f53fd1c0352d3d7ec17b8f73d7351bf76f4821e55d123c9d2abc2c53ba48e4"
+    },
+    "liquid-theme-a11y": {
+      "source": "benjaminsehl/liquid-skills",
+      "sourceType": "github",
+      "skillPath": "skills/liquid-theme-a11y/SKILL.md",
+      "computedHash": "3e5a3e25e6e234be0dbd315a23a2fb1da148b9cbbc9a64f51c12b8013d0ef847"
+    },
+    "loading-states": {
+      "source": "dylantarre/animation-principles",
+      "sourceType": "github",
+      "skillPath": "skills/05-by-animation-type/loading-states/SKILL.md",
+      "computedHash": "157d1982caa5e0c668e520238b5b531aab56e285227e46c5558828c99b62fe9a"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "6f8d633d7884c1390eff7af4bfaf7a450e798f117e1d49a555e00819dc877f64"
+    },
+    "shopify-liquid-themes": {
+      "source": "benjaminsehl/liquid-skills",
+      "sourceType": "github",
+      "skillPath": "skills/shopify-liquid-themes/SKILL.md",
+      "computedHash": "4c4afe344d3e9b2b7da15a50aa9cb1863de01054e7e61f94119f3b4367bee67d"
+    }
+  }
+}

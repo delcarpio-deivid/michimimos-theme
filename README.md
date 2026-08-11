@@ -7,7 +7,7 @@ Tema Shopify **Online Store 2.0** custom para [michimimos.com](https://michimimo
 
 ## Estado
 
-Documentación y plan de implementación en curso. El código del tema se desarrolla en la rama `dev` y en feature branches; `main` se mantiene limpia como candidata a publicación.
+Desarrollo del tema en la rama `dev` y en feature branches. `main` se mantiene limpia como candidata a publicación.
 
 | Rama | Uso |
 |------|-----|
@@ -17,15 +17,7 @@ Documentación y plan de implementación en curso. El código del tema se desarr
 
 ## Documentación
 
-| Archivo | Contenido |
-|---------|-----------|
-| [PLAN-IMPLEMENTACION-tema.md](PLAN-IMPLEMENTACION-tema.md) | Fases F0–F9 |
-| [plan-ejecucion-tienda-gatos.md](plan-ejecucion-tienda-gatos.md) | Plan de negocio / SEO |
-| [PRD-michimimos-tienda.md](PRD-michimimos-tienda.md) | Requisitos |
-| [UXTD-michimimos-tienda.md](UXTD-michimimos-tienda.md) | UX/UI |
-| [TRD-michimimos-tienda.md](TRD-michimimos-tienda.md) | Arquitectura + paridad SEO vs Dawn (§3.1) |
-| [AGENT-STACK-michimimos.md](AGENT-STACK-michimimos.md) | Skills y herramientas de agentes |
-| [AGENTS.md](AGENTS.md) | Reglas cortas para agentes IA |
+La documentación de negocio, producto y arquitectura **no se publica** en este repositorio (es local al equipo). El único markdown versionado en remoto es este `README.md`.
 
 ## Desarrollo local (cuando exista el scaffold)
 
@@ -40,7 +32,8 @@ shopify theme check
 1. Partir de `dev` (no de `main`).
 2. Crear `feat/<nombre>` o `chore/<nombre>`.
 3. Abrir PR hacia `dev`.
-4. La publicación del tema en Shopify es **manual** y humana — los agentes no publican.
+4. No commitear archivos `*.md` de documentación de proyecto (están en `.gitignore`).
+5. La publicación del tema en Shopify es **manual** y humana — los agentes no publican.
 
 ## Licencia
 
