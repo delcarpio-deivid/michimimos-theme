@@ -1,0 +1,32 @@
+<section class="section-stub" aria-labelledby="BlogHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="BlogHeading-{{ section.id }}">{{ blog.title | escape }}</h1>
+
+    {%- paginate blog.articles by 6 -%}
+      {%- if blog.articles.size == 0 -%}
+        <p>{{ 'blog.empty' | t }}</p>
+      {%- else -%}
+        <ul role="list">
+          {%- for article in blog.articles -%}
+            <li>
+              <a href="{{ article.url }}">{{ article.title | escape }}</a>
+              {%- if article.excerpt != blank -%}
+                <p>{{ article.excerpt | strip_html | truncate: 140 }}</p>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {{ paginate | default_pagination }}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_blog.name",
+  "tag": "section",
+  "class": "section-main-blog",
+  "settings": []
+}
+{% endschema %}

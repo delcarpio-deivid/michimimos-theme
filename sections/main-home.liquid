@@ -1,0 +1,45 @@
+<section class="section-stub" aria-labelledby="HomeHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="HomeHeading-{{ section.id }}">{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.subheading }}</p>
+    {%- if section.settings.show_cta -%}
+      <a class="button" href="{{ routes.collections_url }}">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_home.name",
+  "tag": "section",
+  "class": "section-main-home",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.main_home.settings.heading.label",
+      "default": "Michimimos"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "t:sections.main_home.settings.subheading.label",
+      "default": "Productos pensados para gatos de interior: cómodos, seguros y con buen criterio."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "t:sections.main_home.settings.show_cta.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.main_home.settings.cta_label.label",
+      "default": "Explorar catálogo"
+    }
+  ]
+}
+{% endschema %}

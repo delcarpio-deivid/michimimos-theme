@@ -1,0 +1,43 @@
+{%- comment -%} Cart page stub — drawer en F4 {%- endcomment -%}
+
+<section class="section-stub" aria-labelledby="CartHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="CartHeading-{{ section.id }}">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <p>{{ 'cart.empty' | t }}</p>
+      <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cart">
+        <ul role="list">
+          {%- for item in cart.items -%}
+            <li>
+              <a href="{{ item.url }}">{{ item.product.title | escape }}</a>
+              × {{ item.quantity }} — {{ item.final_line_price | money }}
+              <a href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <p>
+          {{ 'cart.subtotal' | t }}:
+          {{ cart.total_price | money_with_currency }}
+        </p>
+
+        <button type="submit" name="update">{{ 'cart.update' | t }}</button>
+        <button type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+      </form>
+    {%- endif -%}
+
+    <p class="section-stub__note">{{ 'cart.stub_note' | t }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_cart.name",
+  "tag": "section",
+  "class": "section-main-cart",
+  "settings": []
+}
+{% endschema %}

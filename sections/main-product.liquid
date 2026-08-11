@@ -1,0 +1,47 @@
+{%- comment -%} Product stub — PDP completo en F6 {%- endcomment -%}
+
+<section class="section-stub" aria-labelledby="ProductHeading-{{ section.id }}">
+  <div class="page-width">
+    <h1 id="ProductHeading-{{ section.id }}">{{ product.title | escape }}</h1>
+
+    {%- if product.featured_media -%}
+      {{
+        product.featured_media
+        | image_url: width: 800
+        | image_tag: loading: 'eager', widths: '400, 800', sizes: '(min-width: 750px) 400px, 100vw', alt: product.featured_media.alt
+      }}
+    {%- endif -%}
+
+    <p>
+      <span class="visually-hidden">{{ 'products.price' | t }}</span>
+      {{ product.selected_or_first_available_variant.price | money }}
+    </p>
+
+    {%- form 'product', product -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button
+        type="submit"
+        name="add"
+        {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+      >
+        {%- if product.selected_or_first_available_variant.available -%}
+          {{ 'products.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.sold_out' | t }}
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+
+    <div class="rte">{{ product.description }}</div>
+    <p class="section-stub__note">{{ 'products.stub_note' | t }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.name",
+  "tag": "section",
+  "class": "section-main-product",
+  "settings": []
+}
+{% endschema %}

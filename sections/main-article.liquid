@@ -1,0 +1,25 @@
+<article class="section-stub" aria-labelledby="ArticleHeading-{{ section.id }}">
+  <div class="page-width">
+    <p>
+      <a href="{{ blog.url }}">{{ 'article.back' | t }}</a>
+    </p>
+    <h1 id="ArticleHeading-{{ section.id }}">{{ article.title | escape }}</h1>
+    {%- if article.image -%}
+      {{
+        article.image
+        | image_url: width: 1200
+        | image_tag: loading: 'eager', widths: '600, 1200', sizes: '100vw', alt: article.image.alt
+      }}
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "t:sections.main_article.name",
+  "tag": "section",
+  "class": "section-main-article",
+  "settings": []
+}
+{% endschema %}

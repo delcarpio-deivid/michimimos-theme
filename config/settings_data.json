@@ -1,0 +1,14 @@
+{
+  "current": {
+    "color_bg": "#F3F1EE",
+    "color_surface": "#FFFFFB",
+    "color_text": "#1C1B1A",
+    "color_text_muted": "#5E5A55",
+    "color_accent": "#3F6F5B",
+    "color_accent_hover": "#345C4B",
+    "color_line": "#D9D4CD",
+    "color_success": "#4F7D62",
+    "brand_name": "Michimimos",
+    "show_brand_loader": true
+  }
+}

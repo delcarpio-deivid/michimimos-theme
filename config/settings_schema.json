@@ -1,0 +1,84 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Michimimos",
+    "theme_version": "0.1.0",
+    "theme_author": "Michimimos",
+    "theme_documentation_url": "https://github.com/delcarpio-deivid/michimimos-theme",
+    "theme_support_url": "https://github.com/delcarpio-deivid/michimimos-theme/issues"
+  },
+  {
+    "name": "t:settings_schema.colors.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:settings_schema.colors.headers.brand"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "t:settings_schema.colors.settings.color_bg.label",
+        "default": "#F3F1EE"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "t:settings_schema.colors.settings.color_surface.label",
+        "default": "#FFFFFB"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "t:settings_schema.colors.settings.color_text.label",
+        "default": "#1C1B1A"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "t:settings_schema.colors.settings.color_text_muted.label",
+        "default": "#5E5A55"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "t:settings_schema.colors.settings.color_accent.label",
+        "default": "#3F6F5B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "t:settings_schema.colors.settings.color_accent_hover.label",
+        "default": "#345C4B"
+      },
+      {
+        "type": "color",
+        "id": "color_line",
+        "label": "t:settings_schema.colors.settings.color_line.label",
+        "default": "#D9D4CD"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "t:settings_schema.colors.settings.color_success.label",
+        "default": "#4F7D62"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.brand.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "t:settings_schema.brand.settings.brand_name.label",
+        "default": "Michimimos"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_brand_loader",
+        "label": "t:settings_schema.brand.settings.show_brand_loader.label",
+        "default": true
+      }
+    ]
+  }
+]

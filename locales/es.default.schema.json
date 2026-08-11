@@ -1,0 +1,102 @@
+{
+  "settings_schema": {
+    "colors": {
+      "name": "Colores",
+      "headers": {
+        "brand": "Paleta de marca"
+      },
+      "settings": {
+        "color_bg": {
+          "label": "Fondo"
+        },
+        "color_surface": {
+          "label": "Superficie"
+        },
+        "color_text": {
+          "label": "Texto"
+        },
+        "color_text_muted": {
+          "label": "Texto suave"
+        },
+        "color_accent": {
+          "label": "Acento (CTA)"
+        },
+        "color_accent_hover": {
+          "label": "Acento hover"
+        },
+        "color_line": {
+          "label": "Líneas / bordes"
+        },
+        "color_success": {
+          "label": "Éxito"
+        }
+      }
+    },
+    "brand": {
+      "name": "Marca",
+      "settings": {
+        "brand_name": {
+          "label": "Nombre de marca"
+        },
+        "show_brand_loader": {
+          "label": "Mostrar loader de marca"
+        }
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "Encabezado"
+    },
+    "footer": {
+      "name": "Pie de página"
+    },
+    "main_home": {
+      "name": "Inicio (stub)",
+      "settings": {
+        "heading": {
+          "label": "Título"
+        },
+        "subheading": {
+          "label": "Subtítulo"
+        },
+        "show_cta": {
+          "label": "Mostrar CTA"
+        },
+        "cta_label": {
+          "label": "Texto del CTA"
+        }
+      }
+    },
+    "main_product": {
+      "name": "Producto (stub)"
+    },
+    "main_collection": {
+      "name": "Colección (stub)"
+    },
+    "main_list_collections": {
+      "name": "Colecciones (stub)"
+    },
+    "main_cart": {
+      "name": "Carrito (stub)"
+    },
+    "main_blog": {
+      "name": "Blog (stub)"
+    },
+    "main_article": {
+      "name": "Artículo (stub)"
+    },
+    "main_page": {
+      "name": "Página (stub)"
+    },
+    "main_search": {
+      "name": "Búsqueda (stub)"
+    },
+    "main_404": {
+      "name": "404 (stub)"
+    },
+    "main_password": {
+      "name": "Password (stub)"
+    }
+  }
+}
