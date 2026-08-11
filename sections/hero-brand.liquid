@@ -46,7 +46,14 @@
   aria-labelledby="HeroHeading-{{ section.id }}"
 >
   {%- if has_image -%}
-    <div class="hero-brand__media" aria-hidden="true">
+    {%- liquid
+      assign hero_alt = section.settings.image.alt
+      assign hero_decorative = false
+      if hero_alt == blank
+        assign hero_decorative = true
+      endif
+    -%}
+    <div class="hero-brand__media"{% if hero_decorative %} aria-hidden="true"{% endif %}>
       {{
         section.settings.image
         | image_url: width: 2400
@@ -56,7 +63,7 @@
           sizes: '100vw',
           loading: 'eager',
           fetchpriority: 'high',
-          alt: ''
+          alt: hero_alt
       }}
       <div
         class="hero-brand__overlay"
