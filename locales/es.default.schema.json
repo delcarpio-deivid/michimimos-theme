@@ -46,10 +46,32 @@
   },
   "sections": {
     "header": {
-      "name": "Encabezado"
+      "name": "Encabezado",
+      "settings": {
+        "menu": {
+          "label": "Menú principal",
+          "info": "En Admin → Navegación, crea un menú (p. ej. main-menu) con: Inicio, Rascadores, Camas, Fuentes de agua, Comederos automáticos, Juguetes, Paseo y viaje, Aseo, Blog, Sobre nosotros."
+        }
+      }
     },
     "footer": {
-      "name": "Pie de página"
+      "name": "Pie de página",
+      "settings": {
+        "tagline": {
+          "label": "Tagline"
+        },
+        "shipping_text": {
+          "label": "Texto de envíos",
+          "info": "Mensaje corto Chile / Perú (editable)."
+        },
+        "menu": {
+          "label": "Menú del pie",
+          "info": "Opcional: legal, Sobre nosotros, Blog."
+        },
+        "copyright": {
+          "label": "Nombre en copyright"
+        }
+      }
     },
     "main_home": {
       "name": "Inicio (stub)",
@@ -78,7 +100,7 @@
       "name": "Colecciones (stub)"
     },
     "main_cart": {
-      "name": "Carrito (stub)"
+      "name": "Carrito"
     },
     "main_blog": {
       "name": "Blog (stub)"

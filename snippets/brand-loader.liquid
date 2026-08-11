@@ -1,6 +1,6 @@
 {%- comment -%}
-  Brand loader: mark centrado, dismiss vía theme.js (≤1.2s).
-  Respeta prefers-reduced-motion (CSS + JS).
+  Brand loader: mark centrado con tamaño reservado (anti-CLS).
+  Dismiss vía theme.js (≤1.2s). Respeta prefers-reduced-motion.
 {%- endcomment -%}
 
 {%- if settings.show_brand_loader -%}
@@ -18,6 +18,7 @@
       width="64"
       height="64"
       decoding="async"
+      fetchpriority="high"
     >
   </div>
 {%- endif -%}

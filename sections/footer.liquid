@@ -1,20 +1,80 @@
-{%- comment -%} Footer stub — contenido rico en F4 {%- endcomment -%}
+{%- comment -%}
+  Footer: mark + tagline + envíos CL/PE + menú secundario.
+{%- endcomment -%}
+
+{%- liquid
+  assign footer_menu = section.settings.menu
+  assign shipping = section.settings.shipping_text
+  if shipping == blank
+    assign shipping = 'footer.shipping' | t
+  endif
+  assign tagline = section.settings.tagline
+  if tagline == blank
+    assign tagline = 'footer.tagline' | t
+  endif
+  assign copyright_name = section.settings.copyright
+  if copyright_name == blank
+    assign copyright_name = shop.name
+  endif
+-%}
 
 <footer class="site-footer" role="contentinfo">
   <div class="page-width site-footer__inner">
-    <div>
-      {% render 'logo', mark_only: true %}
-      <p>{{ 'footer.tagline' | t }}</p>
-      <p>{{ 'footer.shipping' | t }}</p>
+    <div class="site-footer__brand">
+      {% render 'logo', mark_only: true, class: 'logo site-footer__logo' %}
+      <p class="site-footer__tagline">{{ tagline | escape }}</p>
+      <p class="site-footer__shipping">{{ shipping | escape }}</p>
     </div>
-    <p class="section-stub__note">{{ 'footer.stub_note' | t }}</p>
+
+    {%- if footer_menu != blank -%}
+      <nav class="site-footer__nav" aria-label="{{ 'footer.nav_label' | t }}">
+        <ul class="site-footer__links" role="list">
+          {%- for link in footer_menu.links -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <p class="site-footer__legal">
+      &copy; {{ 'now' | date: '%Y' }}
+      {{ copyright_name | escape }}
+    </p>
   </div>
 </footer>
 
 {% schema %}
 {
   "name": "t:sections.footer.name",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "t:sections.footer.settings.tagline.label",
+      "default": "Hogar calmado para gatos de interior."
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_text",
+      "label": "t:sections.footer.settings.shipping_text.label",
+      "default": "Enviamos a Chile y Perú.",
+      "info": "t:sections.footer.settings.shipping_text.info"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.footer.settings.menu.label",
+      "info": "t:sections.footer.settings.menu.info"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "t:sections.footer.settings.copyright.label",
+      "default": "Michimimos"
+    }
+  ],
   "enabled_on": {
     "groups": ["footer"]
   }

@@ -33,16 +33,19 @@
     }
   },
   "accessibility": {
-    "skip_to_content": "Saltar al contenido"
+    "skip_to_content": "Saltar al contenido",
+    "close": "Cerrar"
   },
   "header": {
     "home": "Inicio",
-    "stub_note": "Menú completo en F4"
+    "nav_label": "Menú principal",
+    "menu_open": "Abrir menú",
+    "menu_close": "Cerrar menú"
   },
   "footer": {
     "tagline": "Hogar calmado para gatos de interior.",
     "shipping": "Enviamos a Chile y Perú.",
-    "stub_note": "Footer rico en F4"
+    "nav_label": "Enlaces del pie"
   },
   "home": {
     "heading": "Michimimos",
@@ -77,7 +80,9 @@
     "checkout": "Ir a pagar",
     "update": "Actualizar",
     "remove": "Quitar",
-    "stub_note": "Drawer de carrito en F4"
+    "remove_item": "Quitar {{ title }} del carrito",
+    "quantity": "Cantidad",
+    "view_cart": "Ver carrito"
   },
   "blog": {
     "title": "Blog",

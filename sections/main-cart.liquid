@@ -1,35 +1,93 @@
-{%- comment -%} Cart page stub — drawer en F4 {%- endcomment -%}
+{%- comment -%}
+  Página de carrito: cantidades, quitar, subtotal, checkout.
+{%- endcomment -%}
 
-<section class="section-stub" aria-labelledby="CartHeading-{{ section.id }}">
+<section class="main-cart" aria-labelledby="CartHeading-{{ section.id }}">
   <div class="page-width">
     <h1 id="CartHeading-{{ section.id }}">{{ 'cart.title' | t }}</h1>
 
     {%- if cart.item_count == 0 -%}
-      <p>{{ 'cart.empty' | t }}</p>
-      <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
+      <div class="main-cart__empty">
+        <p>{{ 'cart.empty' | t }}</p>
+        <a class="button" href="{{ routes.all_products_collection_url }}">
+          {{ 'general.continue_shopping' | t }}
+        </a>
+      </div>
     {%- else -%}
-      <form action="{{ routes.cart_url }}" method="post" id="cart">
-        <ul role="list">
+      <form action="{{ routes.cart_url }}" method="post" id="cart" class="main-cart__form">
+        <ul class="main-cart__list" role="list">
           {%- for item in cart.items -%}
-            <li>
-              <a href="{{ item.url }}">{{ item.product.title | escape }}</a>
-              × {{ item.quantity }} — {{ item.final_line_price | money }}
-              <a href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+            {%- liquid
+              assign img_alt = item.image.alt | default: item.product.title
+              assign qty_id = item.index | plus: 1
+            -%}
+            <li class="main-cart__item">
+              {%- if item.image -%}
+                <a href="{{ item.url }}" class="main-cart__thumb">
+                  {{
+                    item.image
+                    | image_url: width: 240
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '120, 240',
+                      sizes: '120px',
+                      alt: img_alt,
+                      width: 120,
+                      height: 120
+                  }}
+                </a>
+              {%- endif -%}
+
+              <div class="main-cart__item-info">
+                <a href="{{ item.url }}" class="main-cart__item-title">
+                  {{- item.product.title | escape -}}
+                </a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="main-cart__item-variant">{{ item.variant.title | escape }}</p>
+                {%- endunless -%}
+                <p class="main-cart__item-line-price">{{ item.final_line_price | money }}</p>
+                <a
+                  href="{{ item.url_to_remove }}"
+                  class="main-cart__remove"
+                  aria-label="{{ 'cart.remove_item' | t: title: item.product.title }}"
+                >
+                  {{- 'cart.remove' | t -}}
+                </a>
+              </div>
+
+              <div class="main-cart__qty">
+                <label class="visually-hidden" for="Quantity-{{ qty_id }}">
+                  {{ 'cart.quantity' | t }} — {{ item.product.title | escape }}
+                </label>
+                <input
+                  id="Quantity-{{ qty_id }}"
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  inputmode="numeric"
+                >
+              </div>
             </li>
           {%- endfor -%}
         </ul>
 
-        <p>
-          {{ 'cart.subtotal' | t }}:
-          {{ cart.total_price | money_with_currency }}
-        </p>
-
-        <button type="submit" name="update">{{ 'cart.update' | t }}</button>
-        <button type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        <div class="main-cart__summary">
+          <p class="main-cart__subtotal">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <strong>{{ cart.total_price | money_with_currency }}</strong>
+          </p>
+          <div class="main-cart__actions">
+            <button type="submit" name="update" class="button button--secondary">
+              {{ 'cart.update' | t }}
+            </button>
+            <button type="submit" name="checkout" class="button">
+              {{ 'cart.checkout' | t }}
+            </button>
+          </div>
+        </div>
       </form>
     {%- endif -%}
-
-    <p class="section-stub__note">{{ 'cart.stub_note' | t }}</p>
   </div>
 </section>
 
