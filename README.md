@@ -25,11 +25,11 @@ La documentación de negocio, producto y arquitectura **no se publica** en este 
 
 ## Navegación (Admin)
 
-El header consume un **linklist** de Shopify (por defecto `main-menu`). En **Admin → Tienda online → Navegación**, crea o ajusta el menú con ítems tipo:
+El header consume un **linklist** de Shopify (por defecto `main-menu`). En **Admin → Tienda online → Navegación**, crea o ajusta el menú en este orden:
 
-Inicio · Rascadores · Camas · Fuentes de agua · Comederos automáticos · Juguetes · Paseo y viaje · Aseo · Blog · Sobre nosotros
+Inicio · **Rascadores** · **Camas** · **Fuentes de agua** · **Comederos automáticos** · **Juguetes interactivos** · **Paseo y viaje** · **Aseo / mantenimiento** · Blog · **Sobre nosotros**
 
-Las colecciones pueden ser placeholders hasta el catálogo (F8). El pie puede usar un menú `footer` (legal / Sobre nosotros / Blog).
+Esas **7 colecciones** + Sobre nosotros son la navegación canónica del tema (handles y wiring del editor se documentan en el runbook F8 local). El pie puede usar un menú `footer` (legal / Sobre nosotros / Blog).
 
 ## Desarrollo local
 
