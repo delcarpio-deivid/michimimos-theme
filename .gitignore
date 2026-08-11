@@ -1,0 +1,29 @@
+# Dependencias y tooling local
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+
+# Shopify CLI / auth (nunca subir credenciales)
+.shopify/
+*.shopify
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Skills / agentes (caches locales; el proyecto puede versionar skills instaladas en .agents o .cursor/skills si se acuerda)
+*.local.md
+
+# Build / temporales
+dist/
+tmp/
+.cache/
+graphify-out/
