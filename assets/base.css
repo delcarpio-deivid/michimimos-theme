@@ -208,7 +208,12 @@ button:active,
 
 .logo__full {
   width: auto;
-  height: 32px;
+  height: auto;
+  max-height: 32px;
+  max-width: 100%;
+  aspect-ratio: 268 / 40;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .logo__mark {
@@ -218,7 +223,7 @@ button:active,
 
 @media (min-width: 750px) {
   .logo__full {
-    height: 40px;
+    max-height: 40px;
   }
 }
 
@@ -859,8 +864,11 @@ button:active,
 }
 
 .hero-brand__logo .logo__full {
-  height: clamp(2.75rem, 6vw, 3.75rem);
   width: auto;
+  height: auto;
+  max-height: clamp(2.75rem, 6vw, 3.75rem);
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .hero-brand--media .hero-brand__logo {
