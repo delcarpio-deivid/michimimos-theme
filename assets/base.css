@@ -202,16 +202,17 @@ button:active,
 .logo {
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
+  min-width: 0;
   text-decoration: none;
   color: inherit;
 }
 
 .logo__full {
+  display: block;
+  height: 32px;
   width: auto;
-  height: auto;
-  max-height: 32px;
   max-width: 100%;
-  aspect-ratio: 268 / 40;
   object-fit: contain;
   object-position: left center;
 }
@@ -223,7 +224,7 @@ button:active,
 
 @media (min-width: 750px) {
   .logo__full {
-    max-height: 40px;
+    height: 40px;
   }
 }
 
@@ -247,6 +248,8 @@ button:active,
 
 .site-header__logo {
   justify-self: center;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .site-header__menu-toggle {
@@ -864,9 +867,8 @@ button:active,
 }
 
 .hero-brand__logo .logo__full {
+  height: clamp(2.75rem, 6vw, 3.75rem);
   width: auto;
-  height: auto;
-  max-height: clamp(2.75rem, 6vw, 3.75rem);
   max-width: 100%;
   object-fit: contain;
 }
