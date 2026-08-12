@@ -202,29 +202,39 @@ button:active,
 .logo {
   display: inline-flex;
   align-items: center;
+  gap: 0.55rem;
   max-width: 100%;
   min-width: 0;
   text-decoration: none;
   color: inherit;
 }
 
-.logo__full {
+.logo__mark {
   display: block;
-  height: 32px;
-  width: auto;
-  max-width: 100%;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
   object-fit: contain;
-  object-position: left center;
 }
 
-.logo__mark {
-  width: 40px;
-  height: 40px;
+.logo__wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+  color: currentColor;
 }
 
 @media (min-width: 750px) {
-  .logo__full {
-    height: 40px;
+  .logo__mark {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .logo__wordmark {
+    font-size: 1.15rem;
   }
 }
 
@@ -866,11 +876,13 @@ button:active,
   margin-inline: auto;
 }
 
-.hero-brand__logo .logo__full {
-  height: clamp(2.75rem, 6vw, 3.75rem);
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
+.hero-brand__logo .logo__mark {
+  width: clamp(2rem, 5vw, 2.75rem);
+  height: clamp(2rem, 5vw, 2.75rem);
+}
+
+.hero-brand__logo .logo__wordmark {
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
 }
 
 .hero-brand--media .hero-brand__logo {

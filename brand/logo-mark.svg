@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Michimimos">
-  <!-- Abstract M monogram: moss badge, legible at 16x16. No cat clipart. -->
+  <!-- Moss badge: M + abstract cat ears. Legible at 16x16. No cat clipart. -->
   <rect width="32" height="32" rx="8" fill="#3F6F5B"/>
+  <path fill="#F3F1EE" d="M9.1 9.6L11.5 5.1 13.9 9.6z"/>
+  <path fill="#F3F1EE" d="M18.1 9.6L20.5 5.1 22.9 9.6z"/>
   <path
     fill="#F3F1EE"
-    d="M7.5 22.5V10.2c0-.55.45-1 1-1h1.15c.4 0 .76.24.92.61L13.8 17.1l3.23-7.29c.16-.37.52-.61.92-.61H19c.55 0 1 .45 1 1v12.3c0 .55-.45 1-1 1h-1.35c-.55 0-1-.45-1-1v-7.05l-2.55 5.75c-.2.45-.64.74-1.13.74h-.94c-.49 0-.93-.29-1.13-.74L9.35 15.45v7.05c0 .55-.45 1-1 1H8.5c-.55 0-1-.45-1-1z"
+    d="M7.2 24.2V11h2.35l3.55 8.55L16.65 11H19V24.2h-2.45v-8.9l-2.85 6.85h-1.2L9.65 15.3v8.9H7.2z"
   />
 </svg>

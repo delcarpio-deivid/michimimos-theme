@@ -1,5 +1,5 @@
 {%- doc -%}
-  Logo Michimimos (mark + wordmark desde assets/).
+  Logo Michimimos: mark SVG + wordmark tipográfico (legible).
   @param {string} [class] - Clase CSS extra del enlace
   @param {boolean} [mark_only] - Solo el monograma
 {%- enddoc -%}
@@ -14,25 +14,16 @@
   class="{{ logo_class }}"
   aria-label="{{ 'general.accessibility.logo' | t }}"
 >
-  {%- if mark_only -%}
-    <img
-      src="{{ 'logo-mark.svg' | asset_url }}"
-      alt=""
-      width="40"
-      height="40"
-      class="logo__mark"
-      loading="eager"
-      decoding="async"
-    >
-  {%- else -%}
-    <img
-      src="{{ 'logo.svg' | asset_url }}"
-      alt="{{ brand | escape }}"
-      width="268"
-      height="40"
-      class="logo__full"
-      loading="eager"
-      decoding="async"
-    >
-  {%- endif -%}
+  <img
+    src="{{ 'logo-mark.svg' | asset_url }}"
+    alt=""
+    width="40"
+    height="40"
+    class="logo__mark"
+    loading="eager"
+    decoding="async"
+  >
+  {%- unless mark_only -%}
+    <span class="logo__wordmark">{{ brand | escape }}</span>
+  {%- endunless -%}
 </a>
