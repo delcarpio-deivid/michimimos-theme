@@ -1,14 +1,15 @@
 {%- comment -%}
-  Header: logo + linklist + mobile nav + cart trigger/drawer.
-  Menú: crear en Admin → Navegación (Inicio, colecciones, Blog, Sobre nosotros).
+  Header: desktop dos filas (marca + acciones; nav debajo). Móvil: hamburguesa + logo + carrito.
+  Nav: canónica Michimimos (setting) o linklist Admin.
 {%- endcomment -%}
 
 {%- liquid
   assign menu = section.settings.menu
+  assign use_canonical = section.settings.use_canonical_nav
 -%}
 
 <header class="site-header" role="banner" data-site-header>
-  <div class="page-width site-header__inner">
+  <div class="page-width site-header__top">
     <button
       type="button"
       class="site-header__menu-toggle"
@@ -24,40 +25,26 @@
 
     {% render 'logo', class: 'logo site-header__logo' %}
 
-    <nav
-      id="SiteNav-{{ section.id }}"
-      class="site-header__nav-panel"
-      data-nav-panel
-      aria-label="{{ 'header.nav_label' | t }}"
-    >
-      <ul class="site-header__nav" role="list">
-        {%- if menu != blank -%}
-          {%- for link in menu.links -%}
-            <li>
-              <a
-                href="{{ link.url }}"
-                {% if link.active %}
-                  aria-current="page"
-                {% endif %}
-              >
-                {{- link.title | escape -}}
-              </a>
-            </li>
-          {%- endfor -%}
-        {%- else -%}
-          <li>
-            <a href="{{ routes.root_url }}" {% if request.page_type == 'index' %}aria-current="page"{% endif %}>
-              {{ 'header.home' | t }}
-            </a>
-          </li>
-          <li>
-            <a href="{{ routes.collections_url }}">{{ 'list_collections.title' | t }}</a>
-          </li>
-        {%- endif -%}
-      </ul>
-    </nav>
-
     <div class="site-header__actions">
+      <a class="site-header__action site-header__action--search" href="{{ routes.search_url }}">
+        <span class="site-header__action-label">{{ 'header.search' | t }}</span>
+      </a>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          class="site-header__action site-header__action--account"
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+        >
+          <span class="site-header__action-label">
+            {%- if customer -%}
+              {{ 'header.account' | t }}
+            {%- else -%}
+              {{ 'header.login' | t }}
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endif -%}
+
       <button
         type="button"
         class="site-header__cart-toggle"
@@ -66,7 +53,7 @@
         aria-controls="CartDrawer"
         aria-label="{{ 'cart.title' | t }}"
       >
-        <span class="site-header__cart-label">{{ 'cart.title' | t }}</span>
+        <span class="site-header__cart-label">{{ 'header.cart' | t }}</span>
         <span
           class="site-header__cart-count"
           data-cart-count
@@ -79,6 +66,51 @@
     </div>
   </div>
 
+  <nav
+    id="SiteNav-{{ section.id }}"
+    class="site-header__nav-panel"
+    data-nav-panel
+    aria-label="{{ 'header.nav_label' | t }}"
+  >
+    <div class="page-width site-header__nav-inner">
+      {%- if use_canonical or menu == blank -%}
+        {% render 'nav-canonical', list_class: 'site-header__nav' %}
+      {%- else -%}
+        <ul class="site-header__nav" role="list">
+          {%- for link in menu.links -%}
+            <li>
+              <a
+                href="{{ link.url }}"
+                {% if link.active %}
+                  aria-current="page"
+                {% endif %}
+              >
+                {{- link.title | escape -}}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <ul class="site-header__nav-mobile-extras" role="list">
+        <li>
+          <a href="{{ routes.search_url }}">{{ 'header.search' | t }}</a>
+        </li>
+        {%- if shop.customer_accounts_enabled -%}
+          <li>
+            <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+              {%- if customer -%}
+                {{ 'header.account' | t }}
+              {%- else -%}
+                {{ 'header.login' | t }}
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </nav>
+
   <div class="site-header__backdrop" data-nav-backdrop hidden></div>
 </header>
 
@@ -88,6 +120,13 @@
 {
   "name": "t:sections.header.name",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_canonical_nav",
+      "label": "t:sections.header.settings.use_canonical_nav.label",
+      "info": "t:sections.header.settings.use_canonical_nav.info",
+      "default": true
+    },
     {
       "type": "link_list",
       "id": "menu",

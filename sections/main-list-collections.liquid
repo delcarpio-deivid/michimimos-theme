@@ -1,20 +1,30 @@
-<section class="section-stub" aria-labelledby="ListCollectionsHeading-{{ section.id }}">
-  <div class="page-width">
-    <h1 id="ListCollectionsHeading-{{ section.id }}">{{ 'list_collections.title' | t }}</h1>
+{%- comment -%}
+  Hub de productos: 5 paneles canónicos. El panel entero va a la colección.
+{%- endcomment -%}
 
-    {%- if collections.size == 0 -%}
-      <p>{{ 'list_collections.empty' | t }}</p>
-    {%- else -%}
-      <ul role="list">
-        {%- for collection in collections -%}
-          {%- unless collection.handle == 'frontpage' -%}
-            <li>
-              <a href="{{ collection.url }}">{{ collection.title | escape }}</a>
-            </li>
-          {%- endunless -%}
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'list_collections.title' | t
+  endif
+  assign subtext = section.settings.subtext
+  if subtext == blank
+    assign subtext = 'list_collections.subtext' | t
+  endif
+-%}
+
+<section class="products-hub" aria-labelledby="ListCollectionsHeading-{{ section.id }}">
+  <div class="page-width products-hub__inner">
+    <header class="products-hub__header">
+      <h1 id="ListCollectionsHeading-{{ section.id }}" class="products-hub__heading">
+        {{ heading | escape }}
+      </h1>
+      {%- if subtext != blank -%}
+        <p class="products-hub__subtext">{{ subtext | escape }}</p>
+      {%- endif -%}
+    </header>
+
+    {% render 'canonical-categories', item_style: 'hub', list_class: 'products-hub__grid' %}
   </div>
 </section>
 
@@ -23,6 +33,19 @@
   "name": "t:sections.main_list_collections.name",
   "tag": "section",
   "class": "section-main-list-collections",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.main_list_collections.settings.heading.label",
+      "default": "Productos"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "t:sections.main_list_collections.settings.subtext.label",
+      "default": "Lo que tu gato usa cada día, elegido con criterio."
+    }
+  ]
 }
 {% endschema %}

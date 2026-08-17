@@ -1,8 +1,28 @@
-<section class="section-stub" aria-labelledby="NotFoundHeading-{{ section.id }}">
-  <div class="page-width">
-    <h1 id="NotFoundHeading-{{ section.id }}">{{ 'general.404.title' | t }}</h1>
-    <p>{{ 'general.404.subtext' | t }}</p>
-    <a class="button" href="{{ routes.root_url }}">{{ 'general.404.link' | t }}</a>
+{%- comment -%}
+  404: H1 cercano + CTAs a inicio y rascadores/colecciones.
+{%- endcomment -%}
+
+{%- liquid
+  assign rascadores = collections['rascadores']
+  if rascadores != blank
+    assign rascadores_url = rascadores.url
+  else
+    assign rascadores_url = routes.collections_url
+  endif
+-%}
+
+<section class="not-found" aria-labelledby="NotFoundHeading-{{ section.id }}">
+  <div class="page-width not-found__inner">
+    <h1 id="NotFoundHeading-{{ section.id }}" class="not-found__title">
+      {{ 'general.404.title' | t }}
+    </h1>
+    <p class="not-found__text">{{ 'general.404.subtext' | t }}</p>
+    <div class="not-found__actions">
+      <a class="button" href="{{ routes.root_url }}">{{ 'general.404.link' | t }}</a>
+      <a class="button button--secondary" href="{{ rascadores_url }}">
+        {{ 'general.404.cta_rascadores' | t }}
+      </a>
+    </div>
   </div>
 </section>
 

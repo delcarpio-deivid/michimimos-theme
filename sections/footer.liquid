@@ -4,6 +4,7 @@
 
 {%- liquid
   assign footer_menu = section.settings.menu
+  assign use_canonical_footer = section.settings.use_canonical_nav
   assign shipping = section.settings.shipping_text
   if shipping == blank
     assign shipping = 'footer.shipping' | t
@@ -26,8 +27,10 @@
       <p class="site-footer__shipping">{{ shipping | escape }}</p>
     </div>
 
-    {%- if footer_menu != blank -%}
-      <nav class="site-footer__nav" aria-label="{{ 'footer.nav_label' | t }}">
+    <nav class="site-footer__nav" aria-label="{{ 'footer.nav_label' | t }}">
+      {%- if use_canonical_footer or footer_menu == blank -%}
+        {% render 'nav-footer-canonical', list_class: 'site-footer__links' %}
+      {%- else -%}
         <ul class="site-footer__links" role="list">
           {%- for link in footer_menu.links -%}
             <li>
@@ -35,8 +38,8 @@
             </li>
           {%- endfor -%}
         </ul>
-      </nav>
-    {%- endif -%}
+      {%- endif -%}
+    </nav>
 
     <p class="site-footer__legal">
       &copy; {{ 'now' | date: '%Y' }}
@@ -61,6 +64,13 @@
       "label": "t:sections.footer.settings.shipping_text.label",
       "default": "Enviamos a Chile y Perú.",
       "info": "t:sections.footer.settings.shipping_text.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_canonical_nav",
+      "label": "t:sections.footer.settings.use_canonical_nav.label",
+      "info": "t:sections.footer.settings.use_canonical_nav.info",
+      "default": true
     },
     {
       "type": "link_list",

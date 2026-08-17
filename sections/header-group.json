@@ -5,6 +5,7 @@
     "header": {
       "type": "header",
       "settings": {
+        "use_canonical_nav": true,
         "menu": "main-menu"
       }
     }

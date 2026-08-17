@@ -1,0 +1,183 @@
+{%- doc -%}
+  Cinco colecciones canónicas Michimimos: enlaces de nav, tiles del panel o paneles del hub.
+  @param {string} item_style - 'link' | 'tile' | 'hub'
+  @param {string} [list_class]
+  @param {string} [list_id]
+{%- enddoc -%}
+
+{%- liquid
+  assign item_style = item_style | default: 'link'
+  assign list_class = list_class | default: 'canonical-categories'
+  assign pairs = 'rascadores|rascadores,camas|camas,fuentes-de-agua|fuentes,comederos|comederos-automaticos,juguetes|juguetes-interactivos' | split: ','
+-%}
+
+<ul
+  class="{{ list_class }}"
+  role="list"
+  {% if list_id != blank %}
+    id="{{ list_id }}"
+  {% endif %}
+>
+  {%- for pair in pairs -%}
+    {%- liquid
+      assign parts = pair | split: '|'
+      assign primary = parts.first
+      assign fallback = parts.last
+      assign col = collections[primary]
+      if col == blank and fallback != primary
+        assign col = collections[fallback]
+      endif
+      if col != blank
+        assign cat_url = col.url
+      else
+        assign cat_url = '/collections/' | append: primary
+      endif
+
+      assign cat_label = ''
+      case primary
+        when 'rascadores'
+          assign cat_label = 'header.nav.rascadores' | t
+        when 'camas'
+          assign cat_label = 'header.nav.camas' | t
+        when 'fuentes-de-agua'
+          assign cat_label = 'header.nav.fuentes_agua' | t
+        when 'comederos'
+          assign cat_label = 'header.nav.comederos' | t
+        when 'juguetes'
+          assign cat_label = 'header.nav.juguetes' | t
+      endcase
+
+      assign is_current = false
+      if col != blank and collection.handle == col.handle
+        assign is_current = true
+      endif
+
+      assign cover = blank
+      if item_style != 'link'
+        if col != blank and col.featured_image != blank
+          assign cover = col.featured_image
+        elsif col != blank and col.products.first != blank and col.products.first.featured_image != blank
+          assign cover = col.products.first.featured_image
+        endif
+      endif
+
+      assign mosaic_count = 0
+      if item_style == 'hub' and col != blank
+        for product in col.products
+          if mosaic_count >= 4
+            break
+          endif
+          if product.featured_image != blank
+            assign mosaic_count = mosaic_count | plus: 1
+          endif
+        endfor
+      endif
+
+      assign is_first_category = forloop.first
+    -%}
+
+    <li
+      {% if item_style == 'hub' %}
+        class="products-hub__item"
+        style="--hub-stagger: {{ forloop.index0 }}"
+      {% endif %}
+    >
+      {%- if item_style == 'link' -%}
+        <a
+          href="{{ cat_url }}"
+          {% if is_current %}
+            aria-current="page"
+          {% endif %}
+        >
+          {{- cat_label | escape -}}
+        </a>
+      {%- elsif item_style == 'tile' -%}
+        <a
+          class="nav-productos__tile"
+          href="{{ cat_url }}"
+          tabindex="-1"
+          {% if is_current %}
+            aria-current="page"
+          {% endif %}
+        >
+          {%- if cover != blank -%}
+            <span class="nav-productos__tile-media">
+              {{
+                cover
+                | image_url: width: 480
+                | image_tag:
+                  class: 'nav-productos__tile-image',
+                  widths: '160, 240, 320, 480',
+                  sizes: '8rem',
+                  loading: 'lazy',
+                  alt: cat_label
+              }}
+            </span>
+          {%- else -%}
+            <span class="nav-productos__tile-media nav-productos__tile-media--empty" aria-hidden="true"></span>
+          {%- endif -%}
+          <span class="nav-productos__tile-title">{{ cat_label | escape }}</span>
+        </a>
+      {%- else -%}
+        <a class="products-hub__panel" href="{{ cat_url }}">
+          {%- if mosaic_count > 0 -%}
+            <span
+              class="products-hub__mosaic{% if mosaic_count == 1 %} products-hub__mosaic--single{% endif %}"
+              aria-hidden="true"
+            >
+              {%- assign printed = 0 -%}
+              {%- for product in col.products -%}
+                {%- if printed >= 4 -%}
+                  {%- break -%}
+                {%- endif -%}
+                {%- if product.featured_image != blank -%}
+                  {%- liquid
+                    assign img_loading = 'lazy'
+                    if is_first_category and printed == 0
+                      assign img_loading = 'eager'
+                    endif
+                    assign printed = printed | plus: 1
+                  -%}
+                  {{
+                    product.featured_image
+                    | image_url: width: 800
+                    | image_tag:
+                      class: 'products-hub__mosaic-image',
+                      widths: '320, 480, 640, 800',
+                      sizes: '(min-width: 990px) 18vw, (min-width: 750px) 45vw, 100vw',
+                      loading: img_loading,
+                      alt: ''
+                  }}
+                {%- endif -%}
+              {%- endfor -%}
+            </span>
+          {%- elsif cover != blank -%}
+            <span class="products-hub__mosaic products-hub__mosaic--single" aria-hidden="true">
+              {{
+                cover
+                | image_url: width: 800
+                | image_tag:
+                  class: 'products-hub__mosaic-image',
+                  widths: '320, 480, 640, 800',
+                  sizes: '(min-width: 990px) 18vw, (min-width: 750px) 45vw, 100vw',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            </span>
+          {%- else -%}
+            <span class="products-hub__mosaic products-hub__mosaic--empty" aria-hidden="true"></span>
+          {%- endif -%}
+
+          <span class="products-hub__copy">
+            <span class="products-hub__title">{{ cat_label | escape }}</span>
+            {%- if col != blank and col.products_count > 0 -%}
+              <span class="products-hub__count">
+                {{ 'collections.product_count' | t: count: col.products_count }}
+              </span>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- endif -%}
+    </li>
+  {%- endfor -%}
+</ul>

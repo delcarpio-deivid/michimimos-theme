@@ -1,0 +1,34 @@
+{%- doc -%}
+  Pie canónico: Sobre nosotros · Blog (sin Catálogo / Contacto del stub Admin).
+  @param {string} [list_class] - Clase del <ul> (default: site-footer__links)
+{%- enddoc -%}
+
+{%- liquid
+  assign list_class = list_class | default: 'site-footer__links'
+
+  assign page_about = pages['sobre-nosotros']
+  if page_about != blank
+    assign url_about = page_about.url
+  else
+    assign url_about = '/pages/sobre-nosotros'
+  endif
+
+  assign blog_nav = blogs['news']
+  if blog_nav == blank
+    assign blog_nav = blogs.first
+  endif
+  if blog_nav != blank
+    assign url_blog = blog_nav.url
+  else
+    assign url_blog = '/blogs/news'
+  endif
+-%}
+
+<ul class="{{ list_class }}" role="list">
+  <li>
+    <a href="{{ url_about }}">{{ 'header.nav.about' | t }}</a>
+  </li>
+  <li>
+    <a href="{{ url_blog }}">{{ 'header.nav.blog' | t }}</a>
+  </li>
+</ul>

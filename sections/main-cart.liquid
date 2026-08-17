@@ -1,6 +1,15 @@
 {%- comment -%}
-  Página de carrito: cantidades, quitar, subtotal, checkout.
+  Página de carrito: cantidades, quitar, subtotal, checkout. Vacío con tono cercano.
 {%- endcomment -%}
+
+{%- liquid
+  assign rascadores = collections['rascadores']
+  if rascadores != blank
+    assign empty_cta_url = rascadores.url
+  else
+    assign empty_cta_url = routes.collections_url
+  endif
+-%}
 
 <section class="main-cart" aria-labelledby="CartHeading-{{ section.id }}">
   <div class="page-width">
@@ -9,8 +18,8 @@
     {%- if cart.item_count == 0 -%}
       <div class="main-cart__empty">
         <p>{{ 'cart.empty' | t }}</p>
-        <a class="button" href="{{ routes.all_products_collection_url }}">
-          {{ 'general.continue_shopping' | t }}
+        <a class="button button--secondary" href="{{ empty_cta_url }}">
+          {{ 'cart.empty_cta' | t }}
         </a>
       </div>
     {%- else -%}
@@ -85,6 +94,7 @@
               {{ 'cart.checkout' | t }}
             </button>
           </div>
+          <p class="main-cart__note">{{ 'cart.shipping_note' | t }}</p>
         </div>
       </form>
     {%- endif -%}

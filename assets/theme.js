@@ -90,6 +90,8 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && isOpen()) {
+        var openProductos = header.querySelector('[data-productos-nav].is-open');
+        if (openProductos) return;
         setOpen(false);
       }
     });
@@ -485,9 +487,70 @@
     }
   }
 
+  /* —— Productos cluster (desktop panel + mobile accordion) —— */
+  function initProductosNav() {
+    var groups = document.querySelectorAll('[data-productos-nav]');
+    if (!groups.length) return;
+
+    var finePointer =
+      window.matchMedia &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    groups.forEach(function (group) {
+      var toggle = group.querySelector('[data-productos-toggle]');
+      var panel = group.querySelector('[data-productos-panel]');
+      group.classList.add('is-enhanced');
+
+      function isOpen() {
+        return group.classList.contains('is-open');
+      }
+
+      function setOpen(open) {
+        group.classList.toggle('is-open', open);
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        if (panel) {
+          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        }
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          setOpen(!isOpen());
+        });
+      }
+
+      if (finePointer) {
+        group.addEventListener('mouseenter', function () {
+          setOpen(true);
+        });
+        group.addEventListener('mouseleave', function () {
+          setOpen(false);
+        });
+      }
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && isOpen()) {
+          setOpen(false);
+          if (toggle) toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!group.contains(event.target)) {
+          setOpen(false);
+        }
+      });
+    });
+  }
+
   function boot() {
     dismissLoader();
     initNav();
+    initProductosNav();
     initCartDrawer();
     initFaq();
     initProductPage();

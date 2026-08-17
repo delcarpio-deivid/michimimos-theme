@@ -2,6 +2,15 @@
   Drawer ligero de carrito (estado inicial Liquid). Abre desde header.
 {%- endcomment -%}
 
+{%- liquid
+  assign rascadores = collections['rascadores']
+  if rascadores != blank
+    assign empty_cta_url = rascadores.url
+  else
+    assign empty_cta_url = routes.collections_url
+  endif
+-%}
+
 <dialog
   id="CartDrawer"
   class="cart-drawer"
@@ -17,16 +26,18 @@
         data-cart-close
         aria-label="{{ 'accessibility.close' | t }}"
       >
-        <span aria-hidden="true">&times;</span>
+        <span class="cart-drawer__close-label">{{ 'accessibility.close' | t }}</span>
       </button>
     </div>
 
     <div class="cart-drawer__body">
       {%- if cart.item_count == 0 -%}
-        <p class="cart-drawer__empty">{{ 'cart.empty' | t }}</p>
-        <a class="button" href="{{ routes.all_products_collection_url }}" data-cart-close>
-          {{ 'general.continue_shopping' | t }}
-        </a>
+        <div class="cart-drawer__empty-state">
+          <p class="cart-drawer__empty">{{ 'cart.empty' | t }}</p>
+          <a class="button button--secondary" href="{{ empty_cta_url }}" data-cart-close>
+            {{ 'cart.empty_cta' | t }}
+          </a>
+        </div>
       {%- else -%}
         <ul class="cart-drawer__list" role="list">
           {%- for item in cart.items -%}
