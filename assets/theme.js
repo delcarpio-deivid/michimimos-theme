@@ -90,6 +90,8 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && isOpen()) {
+        var openProductos = header.querySelector('[data-productos-nav].is-open');
+        if (openProductos) return;
         setOpen(false);
       }
     });
@@ -233,6 +235,12 @@
   function initProductPage() {
     var root = document.querySelector('[data-product-page]');
     if (!root) return;
+
+    root.querySelectorAll('.product-page__description, .product-page__benefits').forEach(function (block) {
+      block.querySelectorAll('img, picture, video, iframe').forEach(function (node) {
+        node.remove();
+      });
+    });
 
     var form = root.querySelector('[data-product-form]');
     var jsonEl = root.querySelector('[data-product-json]');
@@ -485,9 +493,87 @@
     }
   }
 
+  /* —— Productos: acordeón solo móvil; desktop muestra categorías siempre —— */
+  function initProductosNav() {
+    var groups = document.querySelectorAll('[data-productos-nav]');
+    if (!groups.length) return;
+
+    var mobileNav =
+      window.matchMedia && window.matchMedia('(max-width: 989px)');
+
+    groups.forEach(function (group) {
+      var toggle = group.querySelector('[data-productos-toggle]');
+      var panel = group.querySelector('[data-productos-panel]');
+
+      function isOpen() {
+        return group.classList.contains('is-open');
+      }
+
+      function setOpen(open) {
+        group.classList.toggle('is-open', open);
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        if (panel) {
+          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        }
+      }
+
+      function isMobile() {
+        return mobileNav && mobileNav.matches;
+      }
+
+      function syncMode() {
+        if (isMobile()) {
+          group.classList.add('is-enhanced');
+          setOpen(false);
+        } else {
+          group.classList.remove('is-enhanced');
+          group.classList.remove('is-open');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          if (panel) panel.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function (event) {
+          if (!isMobile()) return;
+          event.preventDefault();
+          event.stopPropagation();
+          setOpen(!isOpen());
+        });
+      }
+
+      document.addEventListener('keydown', function (event) {
+        if (!isMobile()) return;
+        if (event.key === 'Escape' && isOpen()) {
+          setOpen(false);
+          if (toggle) toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!isMobile()) return;
+        if (!group.contains(event.target)) {
+          setOpen(false);
+        }
+      });
+
+      syncMode();
+      if (mobileNav) {
+        if (mobileNav.addEventListener) {
+          mobileNav.addEventListener('change', syncMode);
+        } else if (mobileNav.addListener) {
+          mobileNav.addListener(syncMode);
+        }
+      }
+    });
+  }
+
   function boot() {
     dismissLoader();
     initNav();
+    initProductosNav();
     initCartDrawer();
     initFaq();
     initProductPage();

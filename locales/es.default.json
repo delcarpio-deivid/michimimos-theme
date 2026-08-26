@@ -16,9 +16,10 @@
       "no_results": "No encontramos resultados para “{{ terms }}”. Prueba con otras palabras."
     },
     "404": {
-      "title": "No encontramos esa página",
-      "subtext": "Tal vez el enlace cambió. Vuelve al inicio y te ayudamos a encontrar lo que necesita tu gato.",
-      "link": "Ir al inicio"
+      "title": "Esta página no está",
+      "subtext": "Parece que el enlace se rompió o ya no existe. Volvamos al inicio o a los rascadores, para encontrar algo especial para tu gato.",
+      "link": "Ir al inicio",
+      "cta_rascadores": "Ver rascadores"
     },
     "password": {
       "title": "Pronto abrimos",
@@ -40,7 +41,23 @@
     "home": "Inicio",
     "nav_label": "Menú principal",
     "menu_open": "Abrir menú",
-    "menu_close": "Cerrar menú"
+    "menu_close": "Cerrar menú",
+    "search": "Buscar",
+    "account": "Cuenta",
+    "login": "Cuenta",
+    "cart": "Carrito",
+    "market_cl": "Enviamos a Chile",
+    "nav": {
+      "productos": "Productos",
+      "productos_menu": "Mostrar categorías de productos",
+      "rascadores": "Rascadores",
+      "camas": "Camas",
+      "fuentes_agua": "Fuentes de agua",
+      "comederos": "Comederos",
+      "juguetes": "Juguetes interactivos",
+      "blog": "Blog",
+      "about": "Sobre nosotros"
+    }
   },
   "footer": {
     "tagline": "Hogar calmado para gatos de interior.",
@@ -54,7 +71,7 @@
     "hero": {
       "heading": "Bienestar calmado para gatos de interior",
       "text": "Elegimos con criterio lo que tu gato usa cada día: rascadores firmes, descanso seguro y rutinas que se sienten bien en casa.",
-      "cta": "Ver rascadores"
+      "cta": "Ver productos"
     },
     "trust": {
       "heading": "Compra con calma"
@@ -109,19 +126,39 @@
     "pagination": "Paginación de la colección"
   },
   "list_collections": {
-    "title": "Colecciones",
-    "empty": "Pronto verás nuestras colecciones aquí."
+    "title": "Productos",
+    "subtext": "Lo que tu gato usa cada día, elegido con criterio.",
+    "empty": "Pronto verás nuestros productos aquí.",
+    "categories": {
+      "rascadores": {
+        "description": "Firmes y estables para rascar con calma, sin tambalearse."
+      },
+      "camas": {
+        "description": "Descanso seguro y cómodo para el ritmo real del hogar."
+      },
+      "fuentes_agua": {
+        "description": "Agua fresca y rutina de hidratación sin complicaciones."
+      },
+      "comederos": {
+        "description": "Comidas ordenadas, a la altura correcta y fáciles de limpiar."
+      },
+      "juguetes": {
+        "description": "Estímulo tranquilo para gatos de interior que juegan en casa."
+      }
+    }
   },
   "cart": {
     "title": "Tu carrito",
-    "empty": "Tu carrito está vacío. Cuando estés listo, elige algo que le guste a tu gato.",
+    "empty": "Todavía está quieto. Cuando elijas algo para tu gato, aparece aquí.",
+    "empty_cta": "Seguir viendo rascadores",
     "subtotal": "Subtotal",
     "checkout": "Ir a pagar",
     "update": "Actualizar",
     "remove": "Quitar",
     "remove_item": "Quitar {{ title }} del carrito",
     "quantity": "Cantidad",
-    "view_cart": "Ver carrito"
+    "view_cart": "Ver carrito",
+    "shipping_note": "Gastos de envío y descuentos se calculan al pagar."
   },
   "date_formats": {
     "month_day_year": "%d de %B %Y"

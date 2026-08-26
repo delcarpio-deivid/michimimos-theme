@@ -1,0 +1,23 @@
+{
+  "source": ["assets/logo-mark@3x.png", "assets/fondodepantallamichimimos.png"],
+  "sampled": {
+    "logo_terracotta": "#D86848",
+    "logo_chocolate": "#983818",
+    "logo_cream": "#F8E8D8",
+    "logo_olive": "#988838",
+    "hero_forest": "#283828"
+  },
+  "tokens": {
+    "bg": "#F2EBE3",
+    "surface": "#FFFBF7",
+    "canvas": "#FFFFFF",
+    "text": "#3D2418",
+    "text-muted": "#6B5A4E",
+    "accent": "#2B4034",
+    "accent-hover": "#1F3028",
+    "accent-warm": "#C86848",
+    "accent-warm-hover": "#A85838",
+    "line": "#DDD0C4",
+    "success": "#586838"
+  }
+}

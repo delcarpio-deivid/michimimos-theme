@@ -7,6 +7,7 @@
       "settings": {
         "tagline": "Hogar calmado para gatos de interior.",
         "shipping_text": "Enviamos a Chile y Perú.",
+        "use_canonical_nav": true,
         "menu": "footer",
         "copyright": "Michimimos"
       }

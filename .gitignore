@@ -30,5 +30,6 @@ Thumbs.db
 # Build / temporales
 dist/
 tmp/
+brand/_tmp/
 .cache/
 graphify-out/

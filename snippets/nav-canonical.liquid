@@ -1,0 +1,62 @@
+{%- doc -%}
+  Navegación canónica Michimimos (UXTD / Pencil).
+  @param {string} [list_class] - Clase del <ul> (default: site-header__nav)
+{%- enddoc -%}
+
+{%- liquid
+  assign list_class = list_class | default: 'site-header__nav'
+
+  assign page_about = pages['sobre-nosotros']
+  if page_about != blank
+    assign url_about = page_about.url
+  else
+    assign url_about = '/pages/sobre-nosotros'
+  endif
+
+  assign blog_nav = blogs['news']
+  if blog_nav == blank
+    assign blog_nav = blogs.first
+  endif
+  if blog_nav != blank
+    assign url_blog = blog_nav.url
+  else
+    assign url_blog = '/blogs/news'
+  endif
+-%}
+
+<ul class="{{ list_class }}" role="list">
+  <li class="site-header__nav-home-item">
+    {%- liquid
+      assign nav_home_current = false
+      if request.page_type == 'index'
+        assign nav_home_current = true
+      endif
+    -%}
+    {% render 'logo',
+      variant: 'wordmark',
+      class: 'logo site-header__nav-home',
+      current: nav_home_current
+    %}
+  </li>
+  {% render 'nav-productos' %}
+  <li>
+    <a
+      href="{{ url_blog }}"
+      {% if request.page_type == 'blog' or request.page_type == 'article' %}
+        aria-current="page"
+      {% endif %}
+    >
+      {{- 'header.nav.blog' | t -}}
+    </a>
+  </li>
+  <li>
+    <a
+      href="{{ url_about }}"
+      {% if page_about != blank and page.handle == page_about.handle %}
+        aria-current="page"
+      {% endif %}
+    >
+      {{- 'header.nav.about' | t -}}
+    </a>
+  </li>
+</ul>

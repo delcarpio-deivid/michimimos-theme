@@ -230,11 +230,9 @@
 
         {%- if benefits != blank -%}
           <div class="product-page__benefits rte">{{ benefits }}</div>
-        {%- elsif product.description != blank -%}
-          <div class="product-page__description rte">{{ product.description }}</div>
         {%- endif -%}
 
-        {%- if benefits != blank and product.description != blank -%}
+        {%- if product.description != blank -%}
           <div class="product-page__description rte">{{ product.description }}</div>
         {%- endif -%}
       </div>

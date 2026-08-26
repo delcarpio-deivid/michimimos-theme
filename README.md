@@ -25,11 +25,15 @@ La documentación de negocio, producto y arquitectura **no se publica** en este 
 
 ## Navegación (Admin)
 
-El header consume un **linklist** de Shopify (por defecto `main-menu`). En **Admin → Tienda online → Navegación**, crea o ajusta el menú en este orden:
+El header puede usar la **navegación canónica** del tema (activa por defecto en preview) o un **linklist** de Shopify (`main-menu`).
 
-Inicio · **Rascadores** · **Camas** · **Fuentes de agua** · **Comederos automáticos** · **Juguetes interactivos** · **Paseo y viaje** · **Aseo / mantenimiento** · Blog · **Sobre nosotros**
+Cuando Admin esté listo, desmarca “Usar navegación canónica Michimimos” en el editor del tema y configura **Admin → Tienda online → Navegación → main-menu** en este orden:
 
-Esas **7 colecciones** + Sobre nosotros son la navegación canónica del tema (handles y wiring del editor se documentan en el runbook F8 local). El pie puede usar un menú `footer` (legal / Sobre nosotros / Blog).
+Inicio · **Productos** (Rascadores · Camas · Fuentes de agua · Comederos · Juguetes interactivos) · Blog · **Sobre nosotros**
+
+Handles de colección: `rascadores`, `camas`, `fuentes-de-agua` (o `fuentes`), `comederos`, `juguetes` (o `juguetes-interactivos`). Página: `sobre-nosotros`. No uses la colección “Página de inicio” en el menú.
+
+El pie puede usar enlaces canónicos (Sobre nosotros · Blog) o un menú `footer`.
 
 ## Desarrollo local
 

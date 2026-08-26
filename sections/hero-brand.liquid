@@ -31,9 +31,17 @@
     assign secondary_url = section.settings.secondary_link
   endif
 
+  assign default_hero_asset = 'fondodepantallamichimimos.png'
   assign has_image = false
   if section.settings.image != blank
     assign has_image = true
+  elsif default_hero_asset != blank
+    assign has_image = true
+  endif
+
+  assign use_default_hero_asset = false
+  if section.settings.image == blank and default_hero_asset != blank
+    assign use_default_hero_asset = true
   endif
 
   assign overlay_pct = section.settings.overlay_opacity | default: 40
@@ -46,25 +54,31 @@
   aria-labelledby="HeroHeading-{{ section.id }}"
 >
   {%- if has_image -%}
-    {%- liquid
-      assign hero_alt = section.settings.image.alt
-      assign hero_decorative = false
-      if hero_alt == blank
-        assign hero_decorative = true
-      endif
-    -%}
-    <div class="hero-brand__media"{% if hero_decorative %} aria-hidden="true"{% endif %}>
-      {{
-        section.settings.image
-        | image_url: width: 2400
-        | image_tag:
-          class: 'hero-brand__image',
-          widths: '750, 1100, 1500, 1780, 2000, 2400',
-          sizes: '100vw',
-          loading: 'eager',
-          fetchpriority: 'high',
-          alt: hero_alt
-      }}
+    <div class="hero-brand__media" aria-hidden="true">
+      {%- if use_default_hero_asset -%}
+        <img
+          class="hero-brand__image"
+          src="{{ default_hero_asset | asset_url }}"
+          alt=""
+          width="1672"
+          height="941"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        >
+      {%- else -%}
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            class: 'hero-brand__image',
+            widths: '750, 1100, 1500, 1780, 2000, 2400',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.image.alt
+        }}
+      {%- endif -%}
       <div
         class="hero-brand__overlay"
         style="--hero-overlay: {{ overlay }};"
@@ -74,7 +88,7 @@
 
   <div class="page-width hero-brand__inner">
     <div class="hero-brand__brand">
-      {% render 'logo', class: 'logo hero-brand__logo' %}
+      {% render 'logo', variant: 'lockup', class: 'logo hero-brand__logo' %}
     </div>
 
     <h1 id="HeroHeading-{{ section.id }}" class="hero-brand__heading">
@@ -140,7 +154,7 @@
       "type": "text",
       "id": "cta_label",
       "label": "t:sections.hero_brand.settings.cta_label.label",
-      "default": "Ver rascadores"
+      "default": "Ver productos"
     },
     {
       "type": "text",

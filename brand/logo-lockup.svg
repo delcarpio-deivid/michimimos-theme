@@ -1,5 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 891 160" role="img" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-hidden="true">
   <title>Michimimos</title>
+  <svg x="70" y="36" width="360" height="276" viewBox="0 0 555 426" preserveAspectRatio="xMidYMid meet">
+<title>Michimimos</title>
+  <!-- Plant: 5 leaves -->
+  <g fill="#A09050" stroke="#A09050" stroke-linecap="round">
+    <path d="M82 318 C80 270 76 220 84 155" stroke-width="5" fill="none"/>
+    <ellipse cx="82" cy="138" rx="13" ry="22" transform="rotate(4 82 138)"/>
+    <ellipse cx="58" cy="172" rx="16" ry="26" transform="rotate(-32 58 172)"/>
+    <ellipse cx="108" cy="168" rx="15" ry="25" transform="rotate(28 108 168)"/>
+    <ellipse cx="56" cy="228" rx="15" ry="24" transform="rotate(-22 56 228)"/>
+    <ellipse cx="108" cy="222" rx="14" ry="23" transform="rotate(20 108 222)"/>
+  </g>
+  <!-- Bed outer dome (rounded) -->
+  <path fill="#D07050" d="
+    M128 372
+    C120 300 118 210 124 155
+    C132 70 200 22 300 22
+    C400 22 468 70 476 155
+    C482 210 480 300 472 372
+    C468 398 420 408 300 408
+    C180 408 132 398 128 372
+    Z"/>
+  <!-- Bed interior -->
+  <path fill="#904020" d="
+    M178 360
+    C172 290 170 215 176 170
+    C184 108 232 68 300 68
+    C368 68 416 108 424 170
+    C430 215 428 290 422 360
+    C418 376 372 386 300 386
+    C228 386 182 376 178 360
+    Z"/>
+  <!-- Light rim along opening -->
+  <path fill="none" stroke="#F5E6D8" stroke-width="5.5" stroke-linecap="round"
+    d="M182 355 C176 285 174 215 180 172 C188 112 236 74 300 74 C364 74 412 112 420 172 C426 215 424 285 418 355"/>
+  <!-- Toy -->
+  <line x1="300" y1="80" x2="300" y2="142" stroke="#4A2E1F" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="300" cy="156" r="13" fill="#A09050"/>
+  <!-- Cat -->
+  <g fill="#F0E0D0">
+    <!-- Fluffy head + cheek tufts -->
+    <path d="
+      M214 318
+      C200 295 198 268 212 245
+      C208 228 218 212 238 208
+      C248 188 272 178 300 178
+      C328 178 352 188 362 208
+      C382 212 392 228 388 245
+      C402 268 400 295 386 318
+      C408 328 418 352 398 368
+      C375 382 335 390 300 390
+      C265 390 225 382 202 368
+      C182 352 192 328 214 318
+      Z"/>
+    <!-- Tall ears -->
+    <path d="M240 214 C232 168 248 142 272 168 C262 188 250 204 240 214 Z"/>
+    <path d="M360 214 C368 168 352 142 328 168 C338 188 350 204 360 214 Z"/>
+    <!-- Paws -->
+    <ellipse cx="262" cy="386" rx="24" ry="15"/>
+    <ellipse cx="338" cy="386" rx="24" ry="15"/>
+    <!-- Curved tail -->
+    <path d="M390 330 C418 318 428 342 418 358 C408 372 396 365 390 350 C386 340 386 335 390 330 Z"/>
+  </g>
+  <!-- Inner ears -->
+  <path fill="#D4A080" d="M250 200 C246 175 256 160 268 175 C262 188 254 196 250 200 Z"/>
+  <path fill="#D4A080" d="M350 200 C354 175 344 160 332 175 C338 188 346 196 350 200 Z"/>
+  <!-- Face -->
+  <g fill="none" stroke="#4A2E1F" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M262 262 C270 254 284 254 292 262"/>
+    <path d="M308 262 C316 254 330 254 338 262"/>
+    <!-- W mouth -->
+    <path d="M288 302 C292 310 298 310 300 304 C302 310 308 310 312 302"/>
+  </g>
+  <!-- Heart nose -->
+  <path fill="#4A2E1F" d="M300 284 C296.5 279 290.5 279.5 290.5 285 C290.5 290 300 298 300 298 C300 298 309.5 290 309.5 285 C309.5 279.5 303.5 279 300 284 Z"/>
+  <!-- Whiskers -->
+  <g stroke="#4A2E1F" stroke-width="2" stroke-linecap="round">
+    <line x1="232" y1="280" x2="262" y2="284"/>
+    <line x1="230" y1="292" x2="260" y2="292"/>
+    <line x1="232" y1="304" x2="262" y2="300"/>
+    <line x1="368" y1="280" x2="338" y2="284"/>
+    <line x1="370" y1="292" x2="340" y2="292"/>
+    <line x1="368" y1="304" x2="338" y2="300"/>
+  </g>
+  <!-- Paw toes -->
+  <g stroke="#4A2E1F" stroke-width="1.8" stroke-linecap="round">
+    <line x1="254" y1="382" x2="254" y2="392"/>
+    <line x1="262" y1="381" x2="262" y2="393"/>
+    <line x1="270" y1="382" x2="270" y2="392"/>
+    <line x1="330" y1="382" x2="330" y2="392"/>
+    <line x1="338" y1="381" x2="338" y2="393"/>
+    <line x1="346" y1="382" x2="346" y2="392"/>
+  </g>
+  </svg>
+  <svg x="40" y="330" width="420" height="120" viewBox="0 0 891 160" preserveAspectRatio="xMidYMid meet">
+<title>Michimimos</title>
   <g transform="translate(134.180 0.000) scale(1.000000)">
 
   <g fill="#904020" transform="translate(24.00 120.00) scale(0.110000)">
@@ -18,4 +113,5 @@
   <path fill="#904020" d="M270.89 44.47 C260.39 37.12 259.87 29.25 270.89 35.02 C281.92 29.25 281.39 37.12 270.89 44.47 Z"/>
   <path fill="#904020" d="M385.74 44.47 C375.24 37.12 374.71 29.25 385.74 35.02 C396.76 29.25 396.24 37.12 385.74 44.47 Z"/>
   </g>
+  </svg>
 </svg>

@@ -48,9 +48,13 @@
     "header": {
       "name": "Encabezado",
       "settings": {
+        "use_canonical_nav": {
+          "label": "Usar navegación canónica Michimimos",
+          "info": "Inicio, grupo Productos (hub + colecciones) y Blog / Sobre nosotros. Desmárcalo cuando el menú de Admin (main-menu) ya esté completo."
+        },
         "menu": {
-          "label": "Menú principal",
-          "info": "En Admin → Navegación, crea un menú (p. ej. main-menu) con: Inicio, Rascadores, Camas, Fuentes de agua, Comederos automáticos, Juguetes, Paseo y viaje, Aseo, Blog, Sobre nosotros."
+          "label": "Menú principal (Admin)",
+          "info": "Solo se usa si desmarcas la navegación canónica. Orden: Inicio, Rascadores, Camas, Fuentes de agua, Comederos, Juguetes interactivos, Blog, Sobre nosotros."
         }
       }
     },
@@ -64,9 +68,13 @@
           "label": "Texto de envíos",
           "info": "Mensaje corto Chile / Perú (editable)."
         },
+        "use_canonical_nav": {
+          "label": "Usar enlaces canónicos del pie",
+          "info": "Sobre nosotros + Blog. Desmárcalo cuando el menú footer de Admin esté listo."
+        },
         "menu": {
-          "label": "Menú del pie",
-          "info": "Opcional: legal, Sobre nosotros, Blog."
+          "label": "Menú del pie (Admin)",
+          "info": "Solo si desmarcas los enlaces canónicos: Sobre nosotros, Blog, legal."
         },
         "copyright": {
           "label": "Nombre en copyright"
@@ -108,7 +116,7 @@
         },
         "collection": {
           "label": "Colección del CTA",
-          "info": "Ideal: Rascadores. Si está vacío, el CTA va a /collections."
+          "info": "Opcional. Si está vacío, el CTA va al hub de productos (/collections)."
         },
         "cta_label": {
           "label": "Texto del CTA primario"
@@ -276,7 +284,15 @@
       }
     },
     "main_list_collections": {
-      "name": "Colecciones (stub)"
+      "name": "Productos",
+      "settings": {
+        "heading": {
+          "label": "Título (H1)"
+        },
+        "subtext": {
+          "label": "Frase de apoyo"
+        }
+      }
     },
     "main_cart": {
       "name": "Carrito"
@@ -343,10 +359,10 @@
       }
     },
     "main_search": {
-      "name": "Búsqueda (stub)"
+      "name": "Búsqueda"
     },
     "main_404": {
-      "name": "404 (stub)"
+      "name": "404"
     },
     "main_password": {
       "name": "Password (stub)"

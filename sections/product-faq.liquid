@@ -1,5 +1,5 @@
 {%- comment -%}
-  FAQ accordion accesible en PDP (blocks pregunta/respuesta).
+  FAQ tipográfico en PDP (pregunta + respuesta visibles; sin caja de acordeón).
 {%- endcomment -%}
 
 {%- if section.blocks.size > 0 -%}
@@ -16,43 +16,18 @@
         {{ heading | escape }}
       </h2>
 
-      <div class="product-faq__list" data-faq-accordion>
+      <div class="product-faq__list">
         {%- for block in section.blocks -%}
           {%- liquid
             assign question = block.settings.question
             assign answer = block.settings.answer
-            assign panel_id = 'FaqPanel-' | append: section.id | append: '-' | append: block.id
-            assign button_id = 'FaqButton-' | append: section.id | append: '-' | append: block.id
           -%}
           {%- if question != blank -%}
             <div class="product-faq__item" {{ block.shopify_attributes }}>
-              <h3 class="product-faq__question">
-                <button
-                  type="button"
-                  id="{{ button_id }}"
-                  class="product-faq__trigger"
-                  aria-expanded="false"
-                  aria-controls="{{ panel_id }}"
-                  data-faq-trigger
-                >
-                  <span>{{ question | escape }}</span>
-                  <span class="product-faq__icon" aria-hidden="true"></span>
-                </button>
-              </h3>
-              <div
-                id="{{ panel_id }}"
-                class="product-faq__panel"
-                role="region"
-                aria-labelledby="{{ button_id }}"
-                data-faq-panel
-                hidden
-              >
-                <div class="product-faq__answer rte">
-                  {%- if answer != blank -%}
-                    {{ answer }}
-                  {%- endif -%}
-                </div>
-              </div>
+              <h3 class="product-faq__question">{{ question | escape }}</h3>
+              {%- if answer != blank -%}
+                <div class="product-faq__answer rte">{{ answer }}</div>
+              {%- endif -%}
             </div>
           {%- endif -%}
         {%- endfor -%}

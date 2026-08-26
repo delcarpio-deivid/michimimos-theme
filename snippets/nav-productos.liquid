@@ -1,0 +1,45 @@
+{%- doc -%}
+  Cluster Productos: enlace al hub, colecciones a la vista en desktop, acordeón en móvil, panel de tiles.
+{%- enddoc -%}
+
+{%- liquid
+  assign productos_current = false
+  if request.page_type == 'list-collections'
+    assign productos_current = true
+  endif
+-%}
+
+<li class="nav-productos" data-productos-nav>
+  <div class="nav-productos__bar">
+    <a
+      href="{{ routes.collections_url }}"
+      class="nav-productos__hub"
+      {% if productos_current %}
+        aria-current="page"
+      {% endif %}
+    >
+      {{- 'header.nav.productos' | t -}}
+    </a>
+    <button
+      type="button"
+      class="nav-productos__toggle"
+      data-productos-toggle
+      aria-expanded="false"
+      aria-controls="NavProductosLinks NavProductosPanel"
+      aria-label="{{ 'header.nav.productos_menu' | t }}"
+    >
+      <span class="nav-productos__chevron" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  {% render 'canonical-categories', item_style: 'link', list_class: 'nav-productos__links', list_id: 'NavProductosLinks' %}
+
+  <div
+    id="NavProductosPanel"
+    class="nav-productos__panel"
+    data-productos-panel
+    aria-hidden="true"
+  >
+    {% render 'canonical-categories', item_style: 'tile', list_class: 'nav-productos__tiles' %}
+  </div>
+</li>

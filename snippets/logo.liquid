@@ -1,29 +1,59 @@
 {%- doc -%}
-  Logo Michimimos: mark SVG + wordmark tipográfico (legible).
+  Logo Michimimos: variantes PNG (mark, wordmark, lockup).
   @param {string} [class] - Clase CSS extra del enlace
-  @param {boolean} [mark_only] - Solo el monograma
+  @param {string} [variant] - mark, wordmark o lockup (default lockup)
+  @param {boolean} [mark_only] - Compat: true equivale a variant mark
+  @param {boolean} [current] - Marca aria-current=page (p. ej. home activo)
 {%- enddoc -%}
 
 {%- liquid
   assign logo_class = class | default: 'logo'
-  assign brand = settings.brand_name | default: shop.name
+  assign logo_variant = variant | default: 'lockup'
+
+  if mark_only
+    assign logo_variant = 'mark'
+  endif
 -%}
 
 <a
   href="{{ routes.root_url }}"
   class="{{ logo_class }}"
   aria-label="{{ 'general.accessibility.logo' | t }}"
+  {% if current %}
+    aria-current="page"
+  {% endif %}
 >
-  <img
-    src="{{ 'logo-mark.svg' | asset_url }}"
-    alt=""
-    width="40"
-    height="40"
-    class="logo__mark"
-    loading="eager"
-    decoding="async"
-  >
-  {%- unless mark_only -%}
-    <span class="logo__wordmark">{{ brand | escape }}</span>
-  {%- endunless -%}
+  {%- case logo_variant -%}
+    {%- when 'mark' -%}
+      <img
+        src="{{ 'logo-mark.png' | asset_url }}"
+        srcset="{{ 'logo-mark.png' | asset_url }} 1x, {{ 'logo-mark@2x.png' | asset_url }} 2x, {{ 'logo-mark@3x.png' | asset_url }} 3x"
+        alt=""
+        width="301"
+        height="229"
+        class="logo__mark"
+        loading="eager"
+        decoding="async"
+      >
+    {%- when 'wordmark' -%}
+      <img
+        src="{{ 'logo-wordmark.png' | asset_url }}"
+        alt=""
+        width="727"
+        height="127"
+        class="logo__wordmark"
+        loading="eager"
+        decoding="async"
+      >
+    {%- else -%}
+      <img
+        src="{{ 'logo-lockup.png' | asset_url }}"
+        alt=""
+        width="768"
+        height="512"
+        class="logo__lockup"
+        loading="eager"
+        decoding="async"
+      >
+  {%- endcase -%}
 </a>
