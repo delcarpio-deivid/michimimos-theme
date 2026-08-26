@@ -18,49 +18,49 @@
         "type": "color",
         "id": "color_bg",
         "label": "t:settings_schema.colors.settings.color_bg.label",
-        "default": "#F3F1EE"
+        "default": "#F2EBE3"
       },
       {
         "type": "color",
         "id": "color_surface",
         "label": "t:settings_schema.colors.settings.color_surface.label",
-        "default": "#FFFFFB"
+        "default": "#FFFBF7"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "t:settings_schema.colors.settings.color_text.label",
-        "default": "#1C1B1A"
+        "default": "#3D2418"
       },
       {
         "type": "color",
         "id": "color_text_muted",
         "label": "t:settings_schema.colors.settings.color_text_muted.label",
-        "default": "#5E5A55"
+        "default": "#6B5A4E"
       },
       {
         "type": "color",
         "id": "color_accent",
         "label": "t:settings_schema.colors.settings.color_accent.label",
-        "default": "#3F6F5B"
+        "default": "#2B4034"
       },
       {
         "type": "color",
         "id": "color_accent_hover",
         "label": "t:settings_schema.colors.settings.color_accent_hover.label",
-        "default": "#345C4B"
+        "default": "#1F3028"
       },
       {
         "type": "color",
         "id": "color_line",
         "label": "t:settings_schema.colors.settings.color_line.label",
-        "default": "#D9D4CD"
+        "default": "#DDD0C4"
       },
       {
         "type": "color",
         "id": "color_success",
         "label": "t:settings_schema.colors.settings.color_success.label",
-        "default": "#4F7D62"
+        "default": "#586838"
       }
     ]
   },

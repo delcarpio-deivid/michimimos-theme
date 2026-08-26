@@ -25,15 +25,18 @@
 -%}
 
 <ul class="{{ list_class }}" role="list">
-  <li>
-    <a
-      href="{{ routes.root_url }}"
-      {% if request.page_type == 'index' %}
-        aria-current="page"
-      {% endif %}
-    >
-      {{- 'header.home' | t -}}
-    </a>
+  <li class="site-header__nav-home-item">
+    {%- liquid
+      assign nav_home_current = false
+      if request.page_type == 'index'
+        assign nav_home_current = true
+      endif
+    -%}
+    {% render 'logo',
+      variant: 'wordmark',
+      class: 'logo site-header__nav-home',
+      current: nav_home_current
+    %}
   </li>
   {% render 'nav-productos' %}
   <li>

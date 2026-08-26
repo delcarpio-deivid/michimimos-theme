@@ -46,6 +46,7 @@
     "account": "Cuenta",
     "login": "Cuenta",
     "cart": "Carrito",
+    "market_cl": "Enviamos a Chile",
     "nav": {
       "productos": "Productos",
       "productos_menu": "Mostrar categorías de productos",
@@ -127,7 +128,24 @@
   "list_collections": {
     "title": "Productos",
     "subtext": "Lo que tu gato usa cada día, elegido con criterio.",
-    "empty": "Pronto verás nuestros productos aquí."
+    "empty": "Pronto verás nuestros productos aquí.",
+    "categories": {
+      "rascadores": {
+        "description": "Firmes y estables para rascar con calma, sin tambalearse."
+      },
+      "camas": {
+        "description": "Descanso seguro y cómodo para el ritmo real del hogar."
+      },
+      "fuentes_agua": {
+        "description": "Agua fresca y rutina de hidratación sin complicaciones."
+      },
+      "comederos": {
+        "description": "Comidas ordenadas, a la altura correcta y fáciles de limpiar."
+      },
+      "juguetes": {
+        "description": "Estímulo tranquilo para gatos de interior que juegan en casa."
+      }
+    }
   },
   "cart": {
     "title": "Tu carrito",

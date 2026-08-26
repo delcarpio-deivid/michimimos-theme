@@ -1,13 +1,13 @@
 {
   "current": {
-    "color_bg": "#F3F1EE",
-    "color_surface": "#FFFFFB",
-    "color_text": "#1C1B1A",
-    "color_text_muted": "#5E5A55",
-    "color_accent": "#3F6F5B",
-    "color_accent_hover": "#345C4B",
-    "color_line": "#D9D4CD",
-    "color_success": "#4F7D62",
+    "color_bg": "#F2EBE3",
+    "color_surface": "#FFFBF7",
+    "color_text": "#3D2418",
+    "color_text_muted": "#6B5A4E",
+    "color_accent": "#2B4034",
+    "color_accent_hover": "#1F3028",
+    "color_line": "#DDD0C4",
+    "color_success": "#586838",
     "brand_name": "Michimimos",
     "show_brand_loader": true
   }

@@ -34,17 +34,23 @@
       endif
 
       assign cat_label = ''
+      assign cat_description = ''
       case primary
         when 'rascadores'
           assign cat_label = 'header.nav.rascadores' | t
+          assign cat_description = 'list_collections.categories.rascadores.description' | t
         when 'camas'
           assign cat_label = 'header.nav.camas' | t
+          assign cat_description = 'list_collections.categories.camas.description' | t
         when 'fuentes-de-agua'
           assign cat_label = 'header.nav.fuentes_agua' | t
+          assign cat_description = 'list_collections.categories.fuentes_agua.description' | t
         when 'comederos'
           assign cat_label = 'header.nav.comederos' | t
+          assign cat_description = 'list_collections.categories.comederos.description' | t
         when 'juguetes'
           assign cat_label = 'header.nav.juguetes' | t
+          assign cat_description = 'list_collections.categories.juguetes.description' | t
       endcase
 
       assign is_current = false
@@ -73,7 +79,15 @@
         endfor
       endif
 
-      assign is_first_category = forloop.first
+      assign is_first_hub_item = forloop.first
+
+      if item_style == 'hub'
+        if forloop.index <= 2
+          assign hub_sizes = '(min-width: 990px) 50vw, (min-width: 750px) 50vw, 100vw'
+        else
+          assign hub_sizes = '(min-width: 990px) 33vw, (min-width: 750px) 33vw, 100vw'
+        endif
+      endif
     -%}
 
     <li
@@ -122,7 +136,7 @@
         <a class="products-hub__panel" href="{{ cat_url }}">
           {%- if mosaic_count > 0 -%}
             <span
-              class="products-hub__mosaic{% if mosaic_count == 1 %} products-hub__mosaic--single{% endif %}"
+              class="products-hub__mosaic{% if mosaic_count == 1 %} products-hub__mosaic--single{% else %} products-hub__mosaic--stack products-hub__mosaic--count-{{ mosaic_count }}{% endif %}"
               aria-hidden="true"
             >
               {%- assign printed = 0 -%}
@@ -133,18 +147,18 @@
                 {%- if product.featured_image != blank -%}
                   {%- liquid
                     assign img_loading = 'lazy'
-                    if is_first_category and printed == 0
+                    if is_first_hub_item and printed == 0
                       assign img_loading = 'eager'
                     endif
                     assign printed = printed | plus: 1
                   -%}
                   {{
                     product.featured_image
-                    | image_url: width: 800
+                    | image_url: width: 1200
                     | image_tag:
                       class: 'products-hub__mosaic-image',
-                      widths: '320, 480, 640, 800',
-                      sizes: '(min-width: 990px) 18vw, (min-width: 750px) 45vw, 100vw',
+                      widths: '480, 640, 800, 1000, 1200',
+                      sizes: hub_sizes,
                       loading: img_loading,
                       alt: ''
                   }}
@@ -155,11 +169,11 @@
             <span class="products-hub__mosaic products-hub__mosaic--single" aria-hidden="true">
               {{
                 cover
-                | image_url: width: 800
+                | image_url: width: 1200
                 | image_tag:
                   class: 'products-hub__mosaic-image',
-                  widths: '320, 480, 640, 800',
-                  sizes: '(min-width: 990px) 18vw, (min-width: 750px) 45vw, 100vw',
+                  widths: '480, 640, 800, 1000, 1200',
+                  sizes: hub_sizes,
                   loading: 'lazy',
                   alt: ''
               }}
@@ -168,8 +182,13 @@
             <span class="products-hub__mosaic products-hub__mosaic--empty" aria-hidden="true"></span>
           {%- endif -%}
 
+          <span class="products-hub__veil" aria-hidden="true"></span>
+
           <span class="products-hub__copy">
             <span class="products-hub__title">{{ cat_label | escape }}</span>
+            {%- if cat_description != blank -%}
+              <span class="products-hub__description">{{ cat_description | escape }}</span>
+            {%- endif -%}
             {%- if col != blank and col.products_count > 0 -%}
               <span class="products-hub__count">
                 {{ 'collections.product_count' | t: count: col.products_count }}
