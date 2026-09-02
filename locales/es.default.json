@@ -112,6 +112,7 @@
   "collections": {
     "title": "Colección",
     "empty": "Aún no hay productos en esta colección. Pronto sumaremos opciones con criterio.",
+    "more_soon": "Pronto sumaremos más opciones para tu gato.",
     "product_count": {
       "one": "{{ count }} producto",
       "other": "{{ count }} productos"
@@ -119,6 +120,7 @@
     "sort_by": "Ordenar",
     "apply_sort": "Aplicar orden",
     "filters": "Filtros",
+    "filters_and_sort": "Filtros y orden",
     "clear_filters": "Quitar filtros",
     "apply_filters": "Aplicar filtros",
     "price_min": "Precio mínimo",
