@@ -26,12 +26,16 @@
   endif
 -%}
 
-<section class="home-about" aria-labelledby="AboutHeading-{{ section.id }}">
+<section class="home-about" data-reveal-section aria-labelledby="AboutHeading-{{ section.id }}">
   <div class="page-width home-about__inner">
-    <h2 id="AboutHeading-{{ section.id }}" class="home-about__heading">
+    <h2
+      id="AboutHeading-{{ section.id }}"
+      class="home-about__heading"
+      data-reveal="rise"
+    >
       {{ heading | escape }}
     </h2>
-    <p class="home-about__text">{{ text | escape }}</p>
+    <p class="home-about__text" data-reveal="rise">{{ text | escape }}</p>
     {%- if link_url != blank -%}
       <a class="home-about__link" href="{{ link_url }}">{{ link_label | escape }}</a>
     {%- endif -%}

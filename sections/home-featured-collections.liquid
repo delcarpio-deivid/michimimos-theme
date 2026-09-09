@@ -1,5 +1,8 @@
 {%- comment -%}
   Hasta 3 colecciones destacadas: imagen + nombre + enlace. Sin cards de marketing.
+  Si los pickers están vacíos, fallback a handles canónicos (README / F8).
+  Imagen: featured_image de la colección, o primer producto.
+  Marco-onda arriba/abajo; reveals al scroll se conservan.
 {%- endcomment -%}
 
 {%- liquid
@@ -8,57 +11,101 @@
     assign heading = 'home.collections.heading' | t
   endif
 
+  assign featured_1 = section.settings.collection_1
+  if featured_1 == blank
+    assign featured_1 = collections['rascadores']
+  endif
+
+  assign featured_2 = section.settings.collection_2
+  if featured_2 == blank
+    assign featured_2 = collections['camas']
+  endif
+
+  assign featured_3 = section.settings.collection_3
+  if featured_3 == blank
+    assign featured_3 = collections['fuentes-de-agua']
+    if featured_3 == blank
+      assign featured_3 = collections['fuentes']
+    endif
+  endif
+
   assign has_any = false
-  if section.settings.collection_1 != blank or section.settings.collection_2 != blank or section.settings.collection_3 != blank
+  if featured_1 != blank or featured_2 != blank or featured_3 != blank
     assign has_any = true
   endif
+
+  assign reveal_i = 0
 -%}
 
 {%- if has_any -%}
-  <section class="home-collections" aria-labelledby="CollectionsHeading-{{ section.id }}">
+  <section class="home-collections" data-reveal-section aria-labelledby="CollectionsHeading-{{ section.id }}">
     <div class="page-width home-collections__inner">
-      <h2 id="CollectionsHeading-{{ section.id }}" class="home-collections__heading">
-        {{ heading | escape }}
-      </h2>
+      <div class="home-collections__frame">
+        {% render 'home-collections-wave', position: 'top' %}
+        <div class="home-collections__body">
+          <h2
+            id="CollectionsHeading-{{ section.id }}"
+            class="home-collections__heading"
+            data-reveal="rise"
+          >
+            {{ heading | escape }}
+          </h2>
 
-      <ul class="home-collections__grid" role="list">
-        {%- for i in (1..3) -%}
-          {%- liquid
-            case i
-              when 1
-                assign featured = section.settings.collection_1
-              when 2
-                assign featured = section.settings.collection_2
-              when 3
-                assign featured = section.settings.collection_3
-            endcase
-          -%}
-          {%- if featured != blank -%}
-            <li class="home-collections__item">
-              <a class="home-collections__link" href="{{ featured.url }}">
-                {%- if featured.featured_image != blank -%}
-                  <div class="home-collections__media">
-                    {%- assign featured_alt = featured.featured_image.alt | default: featured.title -%}
-                    {{
-                      featured.featured_image
-                      | image_url: width: 900
-                      | image_tag:
-                        class: 'home-collections__image',
-                        widths: '400, 600, 900',
-                        sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 100vw',
-                        loading: 'lazy',
-                        alt: featured_alt
-                    }}
-                  </div>
-                {%- else -%}
-                  <div class="home-collections__media home-collections__media--empty" aria-hidden="true"></div>
-                {%- endif -%}
-                <span class="home-collections__title">{{ featured.title | escape }}</span>
-              </a>
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
+          <ul class="home-collections__grid" role="list">
+            {%- for i in (1..3) -%}
+              {%- liquid
+                case i
+                  when 1
+                    assign featured = featured_1
+                  when 2
+                    assign featured = featured_2
+                  when 3
+                    assign featured = featured_3
+                endcase
+
+                assign card_image = blank
+                if featured != blank
+                  if featured.featured_image != blank
+                    assign card_image = featured.featured_image
+                  elsif featured.products.first != blank and featured.products.first.featured_image != blank
+                    assign card_image = featured.products.first.featured_image
+                  endif
+                endif
+              -%}
+              {%- if featured != blank -%}
+                <li
+                  class="home-collections__item"
+                  data-reveal="rise"
+                  style="--reveal-i: {{ reveal_i }};"
+                >
+                  <a class="home-collections__link" href="{{ featured.url }}">
+                    {%- if card_image != blank -%}
+                      <div class="home-collections__media">
+                        {%- assign featured_alt = card_image.alt | default: featured.title -%}
+                        {{
+                          card_image
+                          | image_url: width: 900
+                          | image_tag:
+                            class: 'home-collections__image',
+                            widths: '400, 600, 900',
+                            sizes: '(min-width: 990px) 30vw, (min-width: 750px) 45vw, 100vw',
+                            loading: 'lazy',
+                            alt: featured_alt
+                        }}
+                      </div>
+                    {%- else -%}
+                      <div class="home-collections__media home-collections__media--empty" aria-hidden="true"></div>
+                    {%- endif -%}
+                    <span class="home-collections__title">{{ featured.title | escape }}</span>
+                  </a>
+                </li>
+                {%- assign reveal_i = reveal_i | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+        {% render 'home-collections-wave', position: 'bottom' %}
+      </div>
     </div>
   </section>
 {%- endif -%}

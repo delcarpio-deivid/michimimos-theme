@@ -570,6 +570,87 @@
     });
   }
 
+  /* —— Home below-fold reveals (once; after loader) —— */
+  function whenLoaderSettled(callback) {
+    var loader = document.querySelector('[data-brand-loader]');
+    if (!loader || loader.hasAttribute('hidden')) {
+      callback();
+      return;
+    }
+
+    var settled = false;
+    function done() {
+      if (settled) return;
+      settled = true;
+      callback();
+    }
+
+    var mo = new MutationObserver(function () {
+      if (loader.hasAttribute('hidden')) {
+        mo.disconnect();
+        done();
+      }
+    });
+    mo.observe(loader, { attributes: true, attributeFilter: ['hidden'] });
+    /* Safety: never block reveals forever if loader stuck */
+    window.setTimeout(function () {
+      mo.disconnect();
+      done();
+    }, LOADER_MAX_MS + 800);
+  }
+
+  function initHomeReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    /* CSS view() scrub handles bidirectional motion when supported */
+    if (
+      window.CSS &&
+      CSS.supports &&
+      CSS.supports('animation-timeline', 'view()')
+    ) {
+      return;
+    }
+
+    whenLoaderSettled(function () {
+      var sections = document.querySelectorAll('[data-reveal-section]');
+      if (!sections.length) return;
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var el = entry.target;
+            var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+            var top = entry.boundingClientRect.top;
+
+            if (entry.isIntersecting && top < vh * 0.82) {
+              window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(function () {
+                  el.classList.add('is-inview');
+                });
+              });
+              return;
+            }
+
+            if (!entry.isIntersecting || top > vh * 0.92) {
+              el.classList.remove('is-inview');
+            }
+          });
+        },
+        { rootMargin: '0px 0px -12% 0px', threshold: [0, 0.15, 0.3] }
+      );
+
+      sections.forEach(function (el) {
+        observer.observe(el);
+      });
+    });
+  }
+
   function boot() {
     dismissLoader();
     initNav();
@@ -577,6 +658,7 @@
     initCartDrawer();
     initFaq();
     initProductPage();
+    initHomeReveal();
   }
 
   if (document.readyState === 'loading') {

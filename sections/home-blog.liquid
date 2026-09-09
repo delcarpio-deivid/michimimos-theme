@@ -13,10 +13,14 @@
 -%}
 
 {%- if blog != blank and blog.articles_count > 0 -%}
-  <section class="home-blog" aria-labelledby="BlogHeading-{{ section.id }}">
+  <section class="home-blog" data-reveal-section aria-labelledby="BlogHeading-{{ section.id }}">
     <div class="page-width home-blog__inner">
       <div class="home-blog__header">
-        <h2 id="BlogHeading-{{ section.id }}" class="home-blog__heading">
+        <h2
+          id="BlogHeading-{{ section.id }}"
+          class="home-blog__heading"
+          data-reveal="rise"
+        >
           {{ heading | escape }}
         </h2>
         <a class="home-blog__all" href="{{ blog.url }}">{{ 'home.blog.view_all' | t }}</a>
@@ -27,7 +31,11 @@
           {%- liquid
             assign article_alt = article.image.alt | default: article.title
           -%}
-          <li class="home-blog__item">
+          <li
+            class="home-blog__item"
+            data-reveal="rise"
+            style="--reveal-i: {{ forloop.index0 }};"
+          >
             <a class="home-blog__link" href="{{ article.url }}">
               {%- if article.image != blank -%}
                 <div class="home-blog__media">

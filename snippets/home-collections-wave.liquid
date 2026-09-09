@@ -1,0 +1,24 @@
+{%- comment -%}
+  Onda decorativa page-width para enmarcar Empieza por aquí.
+  position: top | bottom
+{%- endcomment -%}
+{%- liquid
+  assign wave_pos = position | default: 'top'
+-%}
+<svg
+  class="home-wave home-wave--{{ wave_pos }}"
+  viewBox="0 0 1200 24"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    class="home-wave__path"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.25"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M0 12 C 50 4, 100 20, 150 12 S 250 4, 300 12 S 400 20, 450 12 S 550 4, 600 12 S 700 20, 750 12 S 850 4, 900 12 S 1000 20, 1050 12 S 1150 4, 1200 12"
+  />
+</svg>
