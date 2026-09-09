@@ -7,20 +7,31 @@
   if heading == blank
     assign heading = 'home.trust.heading' | t
   endif
+  assign reveal_i = 0
 -%}
 
-<section class="home-trust" aria-labelledby="TrustHeading-{{ section.id }}">
+<section class="home-trust" data-reveal-section aria-labelledby="TrustHeading-{{ section.id }}">
   <div class="page-width home-trust__inner">
-    <h2 id="TrustHeading-{{ section.id }}" class="home-trust__heading">
+    <h2
+      id="TrustHeading-{{ section.id }}"
+      class="home-trust__heading"
+      data-reveal="rise"
+    >
       {{ heading | escape }}
     </h2>
 
     <ul class="home-trust__list" role="list">
       {%- for block in section.blocks -%}
         {%- if block.settings.text != blank -%}
-          <li class="home-trust__item" {{ block.shopify_attributes }}>
+          <li
+            class="home-trust__item"
+            data-reveal="rise"
+            style="--reveal-i: {{ reveal_i }};"
+            {{ block.shopify_attributes }}
+          >
             {{ block.settings.text | escape }}
           </li>
+          {%- assign reveal_i = reveal_i | plus: 1 -%}
         {%- endif -%}
       {%- endfor -%}
     </ul>

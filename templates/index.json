@@ -11,68 +11,10 @@
         "text_alignment": "left"
       }
     },
-    "trust": {
-      "type": "home-trust",
-      "blocks": {
-        "trust_1": {
-          "type": "line",
-          "settings": {
-            "text": "Enviamos a Chile y Perú con seguimiento claro."
-          }
-        },
-        "trust_2": {
-          "type": "line",
-          "settings": {
-            "text": "Pago seguro en el checkout de Shopify."
-          }
-        },
-        "trust_3": {
-          "type": "line",
-          "settings": {
-            "text": "Elegimos productos pensados para gatos de interior."
-          }
-        }
-      },
-      "block_order": ["trust_1", "trust_2", "trust_3"],
-      "settings": {
-        "heading": "Compra con calma"
-      }
-    },
     "featured_collections": {
       "type": "home-featured-collections",
       "settings": {
         "heading": "Empieza por aquí"
-      }
-    },
-    "about": {
-      "type": "home-about",
-      "settings": {
-        "heading": "Michimimos, con criterio",
-        "text": "Somos una tienda cercana para quienes viven con gatos de interior. Priorizamos confort, seguridad y piezas que encajan en el ritmo real del hogar.",
-        "link_label": "Conócenos"
-      }
-    },
-    "reviews": {
-      "type": "home-reviews",
-      "blocks": {
-        "review_1": {
-          "type": "quote",
-          "settings": {
-            "quote": "El rascador quedó firme y mi gato lo adoptó en el primer día. Se nota que pensaron en el uso real.",
-            "author": "Camila, Santiago"
-          }
-        },
-        "review_2": {
-          "type": "quote",
-          "settings": {
-            "quote": "Pedí desde Lima y llegó bien embalado. El tono de la tienda se siente cercano, sin exagerar.",
-            "author": "Diego, Lima"
-          }
-        }
-      },
-      "block_order": ["review_1", "review_2"],
-      "settings": {
-        "heading": "Lo que cuentan en casa"
       }
     },
     "blog": {
@@ -83,5 +25,5 @@
       }
     }
   },
-  "order": ["hero", "trust", "featured_collections", "about", "reviews", "blog"]
+  "order": ["hero", "featured_collections", "blog"]
 }

@@ -17,6 +17,7 @@
   --font-body: "Source Sans 3", "IBM Plex Sans", system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --dur-fast: 150ms;
   --dur-med: 280ms;
   --dur-loader: 600ms;
@@ -223,6 +224,61 @@ button:active,
 .main-content > .shopify-section:not(:only-child):nth-child(even) {
   background-color: var(--color-surface);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-line) 70%, transparent);
+}
+
+/* Home: blanco entre hero y footer crema (rompe banding impar/par) */
+.template-index .main-content {
+  background-color: var(--color-canvas);
+}
+
+.template-index .main-content > .shopify-section:not(.section-hero-brand) {
+  background-color: var(--color-canvas);
+  box-shadow: none;
+}
+
+/* Home collections: wave frame (idle drift + hover) */
+.home-collections__frame {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.home-collections__body {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.home-wave {
+  display: block;
+  width: 100%;
+  height: 1.25rem;
+  color: color-mix(in srgb, var(--color-line) 70%, var(--color-accent));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-wave__path {
+  stroke-dasharray: 48 16;
+  animation: home-wave-drift 9s linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-collections__frame:hover .home-wave {
+    color: color-mix(in srgb, var(--color-accent) 45%, var(--color-line));
+  }
+
+  .home-collections__frame:hover .home-wave__path {
+    stroke-width: 1.6;
+    animation-duration: 5.5s;
+  }
+}
+
+@keyframes home-wave-drift {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -128;
+  }
 }
 
 /* Productos hub + colección: plano blanco entre nav/footer crema */
@@ -1546,12 +1602,12 @@ button:active,
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--space-xl) var(--space-lg);
+  gap: var(--space-lg) var(--space-md);
 }
 
 .home-collections__link {
   display: grid;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   color: var(--color-text);
   text-decoration: none;
 }
@@ -1561,10 +1617,15 @@ button:active,
 }
 
 .home-collections__media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--radius-sm);
   background: var(--placeholder-fill);
+}
+
+.home-collections__media:not(.home-collections__media--empty) {
+  border: 1px solid var(--color-line);
+  box-shadow: inset 0 0 0 3px var(--color-canvas);
 }
 
 .home-collections__image {
@@ -1651,10 +1712,23 @@ button:active,
 }
 
 .home-reviews__quote {
+  position: relative;
   margin: 0;
   max-width: 36rem;
   padding-left: var(--space-md);
-  border-left: 3px solid var(--color-accent);
+  border-left: none;
+}
+
+.home-reviews__quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-accent);
+  transform-origin: top;
+  transform: scaleY(1);
 }
 
 .home-reviews__quote p {
@@ -1743,6 +1817,128 @@ button:active,
   color: var(--color-accent);
 }
 
+/* Home scroll reveals — IO toggle fallback; scrubbed via view() when supported */
+.js [data-reveal-section] [data-reveal="rise"] {
+  opacity: 0;
+  transform: translateY(1.35rem);
+  transition:
+    opacity 0.75s var(--ease-out),
+    transform 0.75s var(--ease-out);
+  transition-delay: var(--reveal-delay, calc(var(--reveal-i, 0) * 55ms));
+}
+
+.js [data-reveal-section] .home-about__text[data-reveal="rise"] {
+  --reveal-delay: 70ms;
+}
+
+.js [data-reveal-section].is-inview [data-reveal="rise"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js [data-reveal-section] [data-reveal="quote"]::before {
+  transform: scaleY(0);
+  transition: transform 0.75s var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 55ms);
+}
+
+.js [data-reveal-section] [data-reveal="quote"] p,
+.js [data-reveal-section] [data-reveal="quote"] .home-reviews__author {
+  opacity: 0;
+  transition: opacity 0.75s var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 55ms);
+}
+
+.js [data-reveal-section].is-inview [data-reveal="quote"]::before {
+  transform: scaleY(1);
+}
+
+.js [data-reveal-section].is-inview [data-reveal="quote"] p,
+.js [data-reveal-section].is-inview [data-reveal="quote"] .home-reviews__author {
+  opacity: 1;
+}
+
+@keyframes home-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes home-reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes home-reveal-quote-bar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Scroll-linked scrub (down advances, up rewinds) — no .is-inview needed */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal-section] [data-reveal="rise"] {
+      opacity: unset;
+      transform: unset;
+      transition: none;
+      animation: home-reveal-rise linear both;
+      animation-timeline: view();
+      animation-range:
+        entry calc(8% + var(--reveal-i, 0) * 2%)
+        cover calc(22% + var(--reveal-i, 0) * 1.5%);
+    }
+
+    .js [data-reveal-section] .home-about__text[data-reveal="rise"] {
+      animation-range: entry 12% cover 22%;
+    }
+
+    .js [data-reveal-section].is-inview [data-reveal="rise"] {
+      opacity: unset;
+      transform: unset;
+    }
+
+    .js [data-reveal-section] [data-reveal="quote"]::before {
+      transition: none;
+      animation: home-reveal-quote-bar linear both;
+      animation-timeline: view();
+      animation-range:
+        entry calc(8% + var(--reveal-i, 0) * 2%)
+        cover calc(22% + var(--reveal-i, 0) * 1.5%);
+    }
+
+    .js [data-reveal-section] [data-reveal="quote"] p,
+    .js [data-reveal-section] [data-reveal="quote"] .home-reviews__author {
+      transition: none;
+      animation: home-reveal-fade linear both;
+      animation-timeline: view();
+      animation-range:
+        entry calc(8% + var(--reveal-i, 0) * 2%)
+        cover calc(22% + var(--reveal-i, 0) * 1.5%);
+    }
+
+    .js [data-reveal-section].is-inview [data-reveal="quote"]::before,
+    .js [data-reveal-section].is-inview [data-reveal="quote"] p,
+    .js [data-reveal-section].is-inview [data-reveal="quote"] .home-reviews__author {
+      /* Scrub owns state; ignore IO class */
+      opacity: unset;
+      transform: unset;
+    }
+  }
+}
+
 @media (min-width: 750px) {
   .home-collections__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1787,6 +1983,23 @@ button:active,
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .js [data-reveal-section] [data-reveal],
+  .js [data-reveal-section] [data-reveal]::before,
+  .js [data-reveal-section] [data-reveal] p,
+  .js [data-reveal-section] [data-reveal] .home-reviews__author {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .home-wave__path {
+    animation: none !important;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
   }
 
   .home-collections__link:hover .home-collections__image,

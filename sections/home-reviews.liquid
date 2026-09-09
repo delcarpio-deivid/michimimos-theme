@@ -15,12 +15,18 @@
       break
     endif
   endfor
+
+  assign reveal_i = 0
 -%}
 
 {%- if has_quotes -%}
-  <section class="home-reviews" aria-labelledby="ReviewsHeading-{{ section.id }}">
+  <section class="home-reviews" data-reveal-section aria-labelledby="ReviewsHeading-{{ section.id }}">
     <div class="page-width home-reviews__inner">
-      <h2 id="ReviewsHeading-{{ section.id }}" class="home-reviews__heading">
+      <h2
+        id="ReviewsHeading-{{ section.id }}"
+        class="home-reviews__heading"
+        data-reveal="rise"
+      >
         {{ heading | escape }}
       </h2>
 
@@ -28,13 +34,18 @@
         {%- for block in section.blocks -%}
           {%- if block.settings.quote != blank -%}
             <li class="home-reviews__item" {{ block.shopify_attributes }}>
-              <blockquote class="home-reviews__quote">
+              <blockquote
+                class="home-reviews__quote"
+                data-reveal="quote"
+                style="--reveal-i: {{ reveal_i }};"
+              >
                 <p>{{ block.settings.quote | escape }}</p>
                 {%- if block.settings.author != blank -%}
                   <footer class="home-reviews__author">{{ block.settings.author | escape }}</footer>
                 {%- endif -%}
               </blockquote>
             </li>
+            {%- assign reveal_i = reveal_i | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
       </ul>
